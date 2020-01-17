@@ -20,7 +20,7 @@ export default {
     for (let i = 0; i <= DIMENSION; i++) {
       ctx.moveTo(x, y + cellSize * i);
       ctx.fillText(
-        `${i <= DIMENSION / 2 ? 10 - i : 10 - i}`,
+        `${i <= DIMENSION / 2 ? DIMENSION / 2 - i : -i + DIMENSION / 2}`,
         x + (cellSize * DIMENSION) / 2 + 5,
         y + cellSize * i + 5
       );
@@ -30,7 +30,7 @@ export default {
     for (let i = 0; i <= DIMENSION; i++) {
       ctx.moveTo(x + cellSize * i, y);
       ctx.fillText(
-        `${i <= DIMENSION / 2 ? -10 + i : i - 10}`,
+        `${i <= DIMENSION / 2 ? -DIMENSION / 2 + i : i - DIMENSION / 2}`,
         x + cellSize * i - 5,
         y + (cellSize * DIMENSION) / 2 + 15
       );
