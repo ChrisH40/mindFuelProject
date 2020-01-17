@@ -1,18 +1,22 @@
-# Notes
+# Dev Notes
 
-### 2020-01-15
+### 2020-01-16
 
-`52bd7f2`: https://github.com/jmoore-code/mindFuelProject/commit/52bd7f25aea0eead1337ccc3d4ea342d9d931383
+`0971c36`: https://github.com/jmoore-code/mindFuelProject/commit/0971c360907bbbbb7c07bba44daafaff359ba5d7#diff-0dd3b8a29e560f5e5ed0ab4adfca70a6
 
-![status](./screenshots/2020-01-15.png)
+![status](./transformations-game/screenshots/2020-01-15.png)
 
-### Features
+### Features 
 
 - Customizable grid-size
 
-### To implement next
+### To implement (by 2020-01-30)
 
 - Transformations
   - Translation
   - Rotation
   - Reflection
+- collision detection
+- drag + drop
+- visual 
+- transition b/t levels
