@@ -2,7 +2,7 @@
 
 ### 2020-01-19
 
-<img src="./screenshots/2020-01-19.png" 
+<img src="./transformations-game/screenshots/2020-01-19.png" 
 alt="status20200115" width='20%' height="auto" />
 
 ### Features
@@ -26,7 +26,7 @@ alt="status20200115" width='20%' height="auto" />
 
 `52bd7f2`: https://github.com/jmoore-code/mindFuelProject/commit/52bd7f25aea0eead1337ccc3d4ea342d9d931383
 
-<img src="./screenshots/2020-01-15.png" 
+<img src="./transformations-game/screenshots/2020-01-15.png" 
 alt="status20200115" width='20%' height="auto" />
 
 ### Features
