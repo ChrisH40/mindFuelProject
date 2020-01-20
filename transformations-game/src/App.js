@@ -1,12 +1,8 @@
 import React from "react";
-import Canvas from "./components/Canvas";
+import LevelOne from "./components/LevelOne";
 
 const App = () => {
-  return (
-    <div /*onClick={e => console.log("x: ", e.clientX, "y: ", e.clientY)}*/>
-      <Canvas />
-    </div>
-  );
+  return <LevelOne />;
 };
 
 export default App
