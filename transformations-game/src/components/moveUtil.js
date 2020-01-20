@@ -18,7 +18,7 @@ Object.size = obj => {
 const PI = Math.PI;
 const round = Math.round;
 
-const mapToCanvasCoordsFromPixel = gameCoordsInPixel => {
+export const mapToCanvasCoordsFromPixel = gameCoordsInPixel => {
   const mapped = {};
   for (let [key, value] of Object.entries(gameCoordsInPixel)) {
     if (key.includes("x")) mapped[key] = value + SIZE / 2 + GRID_MARGIN;
@@ -27,7 +27,7 @@ const mapToCanvasCoordsFromPixel = gameCoordsInPixel => {
   return mapped;
 };
 
-const mapToCanvasCoords = gameCoords => {
+export const mapToCanvasCoords = gameCoords => {
   const mapped = {};
   for (let [key, value] of Object.entries(gameCoords)) {
     if (key.includes("x")) mapped[key] = value * UNIT + SIZE / 2 + GRID_MARGIN;
@@ -36,7 +36,7 @@ const mapToCanvasCoords = gameCoords => {
   return mapped;
 };
 
-const mapToGameCoords = canvasCoords => {
+export const mapToGameCoords = canvasCoords => {
   const mapped = {};
   for (let [key, value] of Object.entries(canvasCoords)) {
     if (key.includes("x"))
@@ -46,7 +46,7 @@ const mapToGameCoords = canvasCoords => {
   return mapped;
 };
 
-const mapToGameCoordsInPixel = canvasCoords => {
+export const mapToGameCoordsInPixel = canvasCoords => {
   const mapped = {};
   for (let [key, value] of Object.entries(canvasCoords)) {
     if (key.includes("x")) mapped[key] = value - SIZE / 2 - GRID_MARGIN;
@@ -55,7 +55,7 @@ const mapToGameCoordsInPixel = canvasCoords => {
   return mapped;
 };
 
-const distance = (x1, y1, x2, y2) => {
+export const distance = (x1, y1, x2, y2) => {
   return Number(
     Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)).toFixed(2)
   );
@@ -74,7 +74,7 @@ const translateHelper = (canvasCoords, xu, yu) => {
 };
 
 // change shape from { x1:.., y1:.., x2:.., y2:..} to {1:{x:..,y..}, 2:{x:..,y:..}}
-const reorgCoords = coords => {
+export const reorgCoords = coords => {
   const reorgedCoords = {};
   for (let [key, value] of Object.entries(coords)) {
     const coordPair = {};
