@@ -6,10 +6,13 @@ import { SIZE, GRID_MARGIN, DIMENSION, initTriangleShape } from "./settings";
 
 // initial position
 const [x1, y1] = [GRID_MARGIN, GRID_MARGIN];
-// winning position
-const target = {};
 
 class LevelOne extends React.Component {
+  // winning position
+  static defaultProps = {
+    target: { x1: 10, y1: -6, x2: 10, y2: -9, x3: 6, y3: -9 }
+  };
+
   state = { coords: initTriangleShape(x1, y1), dead: false, won: false };
 
   translate = (triangleCoords, xUnit, yUnit) => {
@@ -43,9 +46,8 @@ class LevelOne extends React.Component {
         />
         <Canvas
           triangleCoords={this.state.coords}
-          target={target}
+          target={this.props.target}
           width={SIZE + GRID_MARGIN * 2}
-          height={SIZE + GRID_MARGIN * 2}
         />
       </div>
     );
