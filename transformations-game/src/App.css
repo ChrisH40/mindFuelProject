@@ -1,12 +1,7 @@
 .App {
   display: grid;
-  grid-template-columns: 0.5fr 1.5fr;
+  grid-template-columns: 1.5fr 0.5fr;
   grid-template-rows: 1fr;
-}
-
-.Left-Menu-container {
-  height: 100vh;
-  border-right: solid 1px black; 
 }
 
 /* May need to adjust/remove in order to eliminate scroll and have Canvas show on entire right panel.
