@@ -7,7 +7,7 @@ import {
 } from "./settings";
 
 Object.size = obj => {
-  var size = 0,
+  let size = 0,
     key;
   for (key in obj) {
     if (obj.hasOwnProperty(key)) size++;
@@ -21,7 +21,7 @@ const round = Math.round;
 export const mapToCanvasCoordsFromPixel = gameCoordsInPixel => {
   const mapped = {};
   for (let [key, value] of Object.entries(gameCoordsInPixel)) {
-    if (key.includes("x")) mapped[key] = value + SIZE / 2 + GRID_MARGIN;
+    if (key.includes("x")) mapped[key] = SIZE / 2 + value + GRID_MARGIN;
     else mapped[key] = SIZE / 2 - value + GRID_MARGIN;
   }
   return mapped;
