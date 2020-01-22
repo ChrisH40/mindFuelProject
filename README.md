@@ -1,5 +1,14 @@
 # Dev Notes
 
+### 2020-01-22
+
+<img src="./transformations-game/screenshots/2020-01-22.png" 
+alt="status20200115" width='50%' height="auto" />
+
+### Features
+
+<!-- Needs comments here -->
+
 ### 2020-01-19
 
 <img src="./transformations-game/screenshots/2020-01-19.png" 
@@ -7,7 +16,7 @@ alt="status20200115" width='50%' height="auto" />
 
 ### Features
 
-- Cusomizable Transformations
+- Customizable Transformations
 
 ### To implement next
 
