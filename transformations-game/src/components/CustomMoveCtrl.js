@@ -7,10 +7,11 @@ const CustomMoveCtrl = props => {
   const iyt = useRef(null);
   const ixro = useRef(null);
   const iyro = useRef(null);
-  const degro = useRef(null);
-  const are = useRef(null);
-  const bre = useRef(null);
   const cre = useRef(null);
+
+  let [rotateDirection, setRotateDirection] = useState(null);
+  let [rotateFactor, setRotateFactor] = useState("90");
+  let [reflectAxis, setReflectAxis] = useState(null);
 
   const [translate, reflect, rotate] = props.movement;
   const handleTranslate = () => {
@@ -20,26 +21,57 @@ const CustomMoveCtrl = props => {
       Number(ixt.current.value),
       Number(iyt.current.value)
     );
+    ixt.current.value = 0;
+    iyt.current.value = 0;
     // console.log(ixt.current.value, iyt.current.value);
   };
 
   const handleRotate = () => {
-    rotate(
-      props.triangleCoords,
-      Number(ixro.current.value),
-      Number(iyro.current.value),
-      Number(degro.current.value) == 0 ? 90 : Number(degro.current.value)
-    );
-    // console.log(ixro.current.value, iyro.current.value, degro.current.value);
+    if (!rotateDirection) {
+      console.log(rotateDirection)
+      return
+    }
+    else if (rotateDirection === "optionClockwise") {
+      rotate(
+        props.triangleCoords,
+        Number(ixro.current.value),
+        Number(iyro.current.value),
+        Number(-rotateFactor)
+      );
+      ixro.current.value = 0;
+      iyro.current.value = 0;
+      setRotateDirection(null);
+      setRotateFactor("90");
+    }
+    else if (rotateDirection === "optionCounterClockwise") {
+      rotate(
+        props.triangleCoords,
+        Number(ixro.current.value),
+        Number(iyro.current.value),
+        Number(rotateFactor)
+      );
+      ixro.current.value = 0;
+      iyro.current.value = 0;
+      setRotateDirection(null);
+      setRotateFactor("90");
+      // console.log(ixro.current.value, iyro.current.value, degro.current.value);
+    }
   };
 
   const handleReflect = () => {
-    reflect(
-      props.triangleCoords,
-      are.current.value == "" ? 0 : Number(are.current.value),
-      bre.current.value == "" ? 1 : Number(bre.current.value),
-      cre.current.value == "" ? 0 : Number(cre.current.value)
-    );
+    if (!reflectAxis) {
+      return
+    }
+    else {
+      reflect(
+        props.triangleCoords,
+        reflectAxis === "optionX" ? Number(1) : 0,
+        reflectAxis === "optionY" ? Number(1) : 0,
+        cre.current.value == "" ? 0 : Number(-cre.current.value)
+      );
+      cre.current.value = 0;
+      setReflectAxis(null);
+    }
   };
 
   return (
@@ -56,6 +88,7 @@ const CustomMoveCtrl = props => {
                 max={DIMENSION / 2}
                 id="xUnitt"
                 ref={ixt}
+                defaultValue="0"
               />
             </label>
             <label htmlFor="yUnitt">
@@ -66,6 +99,7 @@ const CustomMoveCtrl = props => {
                 min={-DIMENSION / 2}
                 max={DIMENSION / 2}
                 ref={iyt}
+                defaultValue="0"
               />
             </label>
           </div>
@@ -73,33 +107,51 @@ const CustomMoveCtrl = props => {
         </div>
         <div className="rotate ma2 bg-washed-green">
           <div>
-            <label htmlFor="xUnitro">
-              (X:
-              <input
-                type="number"
-                min={-DIMENSION / 2}
-                max={DIMENSION / 2}
-                id="xUnitro"
-                ref={ixro}
-                placeholder="0"
-              />
-              ,
-            </label>
-            <label htmlFor="yUnitro">
-              Y:
-              <input
-                type="number"
-                min={-DIMENSION / 2}
-                max={DIMENSION / 2}
-                id="yUnitro"
-                ref={iyro}
-                placeholder="0"
-              />
-              )
-            </label>
             <label htmlFor="degro">
-              deg:
-              <input type="number" id="degro" ref={degro} placeholder="90" />
+              <b>90° </b>
+              Clockwise
+              <input type="radio" value="optionClockwise" checked={rotateDirection === "optionClockwise"} onChange={(event) => { setRotateDirection(event.target.value) }} />
+              Counter Clockwise
+              <input type="radio" value="optionCounterClockwise" checked={rotateDirection === "optionCounterClockwise"} onChange={(event) => { setRotateDirection(event.target.value) }} />
+              Factor
+              <select
+                className="rotate-factor"
+                onChange={(event) => { setRotateFactor(event.target.value) }}
+                value={rotateFactor}
+                defaultValue="90"
+              >
+                <option value="90">1</option>
+                <option value="180">2</option>
+                <option value="270">3</option>
+                <option value="360">4</option>
+              </select>
+              Focal Point
+              <label htmlFor="xUnitro">
+                (X:
+              <input
+                  type="number"
+                  min={-DIMENSION / 2}
+                  max={DIMENSION / 2}
+                  id="xUnitro"
+                  ref={ixro}
+                  defaultValue="0"
+                />
+                ,
+            </label>
+              <label htmlFor="yUnitro">
+                Y:
+              <input
+                  type="number"
+                  min={-DIMENSION / 2}
+                  max={DIMENSION / 2}
+                  id="yUnitro"
+                  ref={iyro}
+                  defaultValue="0"
+                />
+                )
+            </label>
+              {/* deg:
+              <input type="number" id="degro" ref={degro} defaultValue="90" /> */}
             </label>
           </div>
           <button onClick={handleRotate}>Rotate</button>
@@ -107,27 +159,13 @@ const CustomMoveCtrl = props => {
         <div className="reflect ma2 bg-lightest-blue">
           <div>
             <label htmlFor="are">
-              <input
-                type="number"
-                min={-DIMENSION / 2}
-                max={DIMENSION / 2}
-                id="are"
-                ref={are}
-                placeholder="0"
-              />
-              x +
+              X-Axis
+              <input type="radio" value="optionX" checked={reflectAxis === 'optionX'} onChange={(event) => { setReflectAxis(event.target.value) }} />
             </label>
             {/* <span className="f4">or</span> */}
             <label htmlFor="bre">
-              <input
-                type="number"
-                min={-DIMENSION / 2}
-                max={DIMENSION / 2}
-                id="bre"
-                ref={bre}
-                placeholder="1"
-              />
-              y +
+              Y-Axis
+              <input type="radio" value="optionY" checked={reflectAxis === 'optionY'} onChange={(event) => { setReflectAxis(event.target.value) }} />
             </label>
             <label htmlFor="cre">
               <input
@@ -136,9 +174,9 @@ const CustomMoveCtrl = props => {
                 max={DIMENSION / 2}
                 id="cre"
                 ref={cre}
-                placeholder="0"
+                defaultValue="0"
               />{" "}
-              = 0
+              + / -
             </label>
           </div>
           <button onClick={handleReflect}>Reflect</button>
