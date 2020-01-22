@@ -76,113 +76,143 @@ const CustomMoveCtrl = props => {
 
   return (
     <div>
-      <h2 className="tc f3 pa0"> 😍 Make Some Cool Moves Here 😎</h2>
-      <div className="tc custom-ops">
-        <div className="translate ma2 bg-washed-red">
-          <div>
-            <label htmlFor="xUnitt">
-              X:
-              <input
-                type="number"
-                min={-DIMENSION / 2}
-                max={DIMENSION / 2}
-                id="xUnitt"
-                ref={ixt}
-                defaultValue="0"
-              />
-            </label>
-            <label htmlFor="yUnitt">
-              Y:
-              <input
-                type="number"
-                id="yUnitt"
-                min={-DIMENSION / 2}
-                max={DIMENSION / 2}
-                ref={iyt}
-                defaultValue="0"
-              />
-            </label>
-          </div>
-          <button onClick={handleTranslate}>Translate</button>
-        </div>
-        <div className="rotate ma2 bg-washed-green">
-          <div>
-            <label htmlFor="degro">
-              <b>90° </b>
-              Clockwise
-              <input type="radio" value="optionClockwise" checked={rotateDirection === "optionClockwise"} onChange={(event) => { setRotateDirection(event.target.value) }} />
-              Counter Clockwise
-              <input type="radio" value="optionCounterClockwise" checked={rotateDirection === "optionCounterClockwise"} onChange={(event) => { setRotateDirection(event.target.value) }} />
-              Factor
-              <select
-                className="rotate-factor"
-                onChange={(event) => { setRotateFactor(event.target.value) }}
-                value={rotateFactor}
-                defaultValue="90"
-              >
-                <option value="90">1</option>
-                <option value="180">2</option>
-                <option value="270">3</option>
-                <option value="360">4</option>
-              </select>
-              Focal Point
-              <label htmlFor="xUnitro">
-                (X:
-              <input
-                  type="number"
-                  min={-DIMENSION / 2}
-                  max={DIMENSION / 2}
-                  id="xUnitro"
-                  ref={ixro}
-                  defaultValue="0"
-                />
-                ,
-            </label>
-              <label htmlFor="yUnitro">
-                Y:
-              <input
-                  type="number"
-                  min={-DIMENSION / 2}
-                  max={DIMENSION / 2}
-                  id="yUnitro"
-                  ref={iyro}
-                  defaultValue="0"
-                />
-                )
-            </label>
-              {/* deg:
-              <input type="number" id="degro" ref={degro} defaultValue="90" /> */}
-            </label>
-          </div>
-          <button onClick={handleRotate}>Rotate</button>
-        </div>
-        <div className="reflect ma2 bg-lightest-blue">
-          <div>
-            <label htmlFor="are">
-              X-Axis
-              <input type="radio" value="optionX" checked={reflectAxis === 'optionX'} onChange={(event) => { setReflectAxis(event.target.value) }} />
-            </label>
-            {/* <span className="f4">or</span> */}
-            <label htmlFor="bre">
-              Y-Axis
-              <input type="radio" value="optionY" checked={reflectAxis === 'optionY'} onChange={(event) => { setReflectAxis(event.target.value) }} />
-            </label>
-            <label htmlFor="cre">
-              <input
-                type="number"
-                min={-DIMENSION / 2}
-                max={DIMENSION / 2}
-                id="cre"
-                ref={cre}
-                defaultValue="0"
-              />{" "}
-              + / -
-            </label>
-          </div>
-          <button onClick={handleReflect}>Reflect</button>
-        </div>
+      <div>
+        <h2 className="tc f3 pa0"> 😍 Make Some Cool Moves Here 😎</h2>
       </div>
-    </div>
+      {/* <div className="tc custom-ops"> */}
+      <div className="translate-container bg-washed-red">
+        {/* <div className="translate ma2 bg-washed-red"> */}
+        <text className="menu-header">Translate</text><br />
+        <label htmlFor="xUnitt">
+          X:
+          <input
+            className="menu-item"
+            type="number"
+            min={-DIMENSION / 2}
+            max={DIMENSION / 2}
+            id="xUnitt"
+            ref={ixt}
+            defaultValue="0"
+          />
+        </label>
+        <label htmlFor="yUnitt">
+          Y:
+          <input
+            className="menu-item"
+            type="number"
+            id="yUnitt"
+            min={-DIMENSION / 2}
+            max={DIMENSION / 2}
+            ref={iyt}
+            defaultValue="0"
+          />
+        </label>
+        <br />
+        <button className="menu-button" onClick={handleTranslate}>Translate</button>
+        {/* </div> */}
+      </div>
+      <div className="rotate-container bg-washed-green">
+        {/* <div className="rotate ma2 bg-washed-green"> */}
+        <text className="menu-header">Rotate 90°</text><br />
+        <label htmlFor="degro">
+          Clockwise
+              <input
+            className="menu-item"
+            type="radio"
+            value="optionClockwise"
+            checked={rotateDirection === "optionClockwise"}
+            onChange={(event) => { setRotateDirection(event.target.value) }} />
+          Counter Clockwise
+              <input
+            className="menu-item"
+            type="radio"
+            value="optionCounterClockwise"
+            checked={rotateDirection === "optionCounterClockwise"}
+            onChange={(event) => { setRotateDirection(event.target.value) }} />
+          Factor
+              <select
+            className="menu-item"
+            onChange={(event) => { setRotateFactor(event.target.value) }}
+            value={rotateFactor}
+            defaultValue="90">
+            <option value="90">1</option>
+            <option value="180">2</option>
+            <option value="270">3</option>
+            <option value="360">4</option>
+          </select>
+          <br />
+          Focal Point&nbsp;
+              <label htmlFor="xUnitro">
+            X:
+              <input
+              className="menu-item"
+              type="number"
+              min={-DIMENSION / 2}
+              max={DIMENSION / 2}
+              id="xUnitro"
+              ref={ixro}
+              defaultValue="0"
+            />
+          </label>
+          <label htmlFor="yUnitro">
+            Y:
+              <input
+              className="menu-item"
+              type="number"
+              min={-DIMENSION / 2}
+              max={DIMENSION / 2}
+              id="yUnitro"
+              ref={iyro}
+              defaultValue="0"
+            />
+          </label>
+          {/* deg:
+              <input type="number" id="degro" ref={degro} defaultValue="90" /> */}
+        </label>
+        {/* </div> */}
+        <br />
+        <button className="menu-button" onClick={handleRotate}>Rotate</button>
+      </div>
+      <div className="reflect-container bg-lightest-blue">
+        {/* <div className="reflect ma2 bg-lightest-blue"> */}
+        <text className="menu-header">Reflect</text><br />
+        <label htmlFor="are">
+          X-Axis
+              <input
+            className="menu-item"
+            type="radio"
+            value="optionX"
+            checked={reflectAxis === 'optionX'}
+            onChange={(event) => { setReflectAxis(event.target.value) }} />
+        </label>
+        {/* <span className="f4">or</span> */}
+        <label htmlFor="bre">
+          Y-Axis
+              <input
+            className="menu-item"
+            type="radio"
+            value="optionY"
+            checked={reflectAxis === 'optionY'}
+            onChange={(event) => { setReflectAxis(event.target.value) }} />
+        </label>
+        <label htmlFor="cre">
+          <input
+            className="menu-item"
+            type="number"
+            min={-DIMENSION / 2}
+            max={DIMENSION / 2}
+            id="cre"
+            ref={cre}
+            defaultValue="0"
+          />
+          + / -
+            </label>
+        <br />
+        <button className="menu-button" onClick={handleReflect}>Reflect</button>
+        {/* </div> */}
+      </div>
+      {/* </div> */}
+    </div >
   );
 };
 
