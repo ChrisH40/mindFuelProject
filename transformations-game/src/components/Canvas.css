@@ -3,10 +3,12 @@ canvas {
   height: 100%;
 }
 
-.custom-ops {
+/* Replaced by CSS in "index.css" for now */
+
+/* .custom-ops {
   display: grid;
   grid-template-columns: repeat(3, auto);
-  /* align-items: center; */
+  align-items: center;
 }
 .custom-ops input {
   width: 2.5rem;
@@ -34,4 +36,4 @@ button {
 
 #degro {
   width: 4rem;
-}
+} */
