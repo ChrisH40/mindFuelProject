@@ -6,14 +6,14 @@ import {
   initTriangleShape
 } from "./settings";
 
-Object.size = obj => {
-  let size = 0,
-    key;
-  for (key in obj) {
-    if (obj.hasOwnProperty(key)) size++;
-  }
-  return size;
-};
+// Object.size = obj => {
+//   let size = 0,
+//     key;
+//   for (key in obj) {
+//     if (obj.hasOwnProperty(key)) size++;
+//   }
+//   return size;
+// };
 
 const PI = Math.PI;
 const round = Math.round;
@@ -61,17 +61,17 @@ export const distance = (x1, y1, x2, y2) => {
   );
 };
 
-const translateHelper = (canvasCoords, xu, yu) => {
-  const translated = {};
-  for (let [key, value] of Object.entries(canvasCoords)) {
-    if (key.includes("x")) {
-      translated[key] = value + xu * UNIT;
-    } else {
-      translated[key] = value + yu * UNIT;
-    }
-  }
-  return translated;
-};
+// export const translateHelper = (canvasCoords, xu, yu) => {
+//   const translated = {};
+//   for (let [key, value] of Object.entries(canvasCoords)) {
+//     if (key.includes("x")) {
+//       translated[key] = value + xu * UNIT;
+//     } else {
+//       translated[key] = value + yu * UNIT;
+//     }
+//   }
+//   return translated;
+// };
 
 // change shape from { x1:.., y1:.., x2:.., y2:..} to {1:{x:..,y..}, 2:{x:..,y:..}}
 export const reorgCoords = coords => {
@@ -90,13 +90,13 @@ export const reorgCoords = coords => {
 };
 
 export default {
-  rotate: (coords, xr = 0, yr = 0, deg = 90) => {
+  rotate: (coords, xr, yr, deg) => {
     // all in game coords
     // x1' = (x1 - xr)cos(deg) - (y1 - yr)sin(deg) + xr
     // y1' = (x1 - xr)sin(deg) + (y1 - yr)cos(deg) + yr
     const rotated = {};
-    var sinDeg = Math.sin((deg / 180) * PI);
-    var cosDeg = Math.cos((deg / 180) * PI);
+    let sinDeg = Math.sin((deg / 180) * PI);
+    let cosDeg = Math.cos((deg / 180) * PI);
     coords = reorgCoords(mapToGameCoords(coords));
     for (let [idx, pt] of Object.entries(coords)) {
       rotated[`x${idx}`] = (pt.x - xr) * cosDeg - (pt.y - yr) * sinDeg + xr;
