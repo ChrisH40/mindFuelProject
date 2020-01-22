@@ -1,17 +1,1 @@
-.App {
-  display: grid;
-  grid-template-columns: 1.5fr 0.5fr;
-  grid-template-rows: 1fr;
-}
-
-/* May need to adjust/remove in order to eliminate scroll and have Canvas show on entire right panel.
-
-/* .Grid-container {
-  height: 100%;
-  width: 100%;
-}
-
-.Grid-Canvas {
-  height: 100%;
-  width: 100%;
-} */
+/* CSS moved to "index.css" */

@@ -1,3 +1,22 @@
+.App {
+  display: grid;
+  grid-template-columns: 1.5fr 0.5fr;
+  grid-template-rows: 1fr;
+}
+
+.Right-Container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.Top-Container,
+.Bottom-Container {
+  height: 49vh;
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px;
+}
 
 body {
   margin: 0;
