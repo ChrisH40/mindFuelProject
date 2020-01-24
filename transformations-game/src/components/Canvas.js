@@ -13,7 +13,12 @@ const Canvas = props => {
       var ctx = canvasEl.current.getContext("2d");
       ctx.clearRect(0, 0, canvasEl.current.width, canvasEl.current.height);
       // draw a 10 x 10 (by default) grid
-      d.drawGrid({ ctx, labelFillStyle: "orange", lineStyle: "#eee" });
+      d.drawGrid({
+        ctx,
+        labelFillStyle: "orange",
+        lineStyle: "#ddd",
+        fillStyle: "rgba(0,0,0,.2)"
+      });
       d.drawAxis({ ctx, lineStyle: "#000" });
       d.drawTriangle({
         ...props.triangleCoords,

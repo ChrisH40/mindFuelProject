@@ -19,6 +19,8 @@ export default {
     lineStyle = "black",
     labelFillStyle = "black"
   }) => {
+    ctx.fillStyle = fillStyle;
+    ctx.fillRect(x, y, SIZE, SIZE);
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(x, y);
@@ -26,8 +28,8 @@ export default {
     ctx.setLineDash([2, 2]);
     for (let i = 0; i <= DIMENSION; i++) {
       ctx.moveTo(x, y + cellSize * i);
-      ctx.fillStyle = labelFillStyle;
       ctx.lineTo(x + SIZE, y + cellSize * i);
+      ctx.fillStyle = labelFillStyle;
       ctx.fillText(
         `${
           i == DIMENSION / 2
