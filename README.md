@@ -2,7 +2,7 @@
 
 ### 2020-01-23
 
-<img src="./transformations-game/screenshots/2020-01-23.png" 
+<img src="./transformations-game/screenshots/2020-01-23.PNG" 
 alt="status20200115" width='50%' height="auto" />
 
 ```js
@@ -34,7 +34,7 @@ d.drawTriangle({
 
 ### 2020-01-22
 
-<img src="./transformations-game/screenshots/2020-01-22.png" 
+<img src="./transformations-game/screenshots/2020-01-22.PNG" 
 alt="status20200115" width='50%' height="auto" />
 
 ### Features
