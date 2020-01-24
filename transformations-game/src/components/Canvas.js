@@ -13,11 +13,21 @@ const Canvas = props => {
       var ctx = canvasEl.current.getContext("2d");
       ctx.clearRect(0, 0, canvasEl.current.width, canvasEl.current.height);
       // draw a 10 x 10 (by default) grid
-      d.drawGrid(ctx);
-      d.drawAxis(ctx);
-      d.drawTriangle({ ...props.triangleCoords, ctx });
+      d.drawGrid({ ctx, labelFillStyle: "orange", lineStyle: "#eee" });
+      d.drawAxis({ ctx, lineStyle: "#000" });
+      d.drawTriangle({
+        ...props.triangleCoords,
+        ctx,
+        lineStyle: "rgb(155,189,238)",
+        fillStyle: "rgba(155, 189,238,0.8)"
+      });
       // draw target triangle
-      d.drawTriangle({ ...mapToCanvasCoords(props.target), ctx });
+      d.drawTriangle({
+        ...mapToCanvasCoords(props.target),
+        ctx,
+        lineStyle: "rgb(188,198,34)",
+        fillStyle: "rgba(188,198,34, 0.8)"
+      });
     }
   }, [props.triangleCoords]);
 

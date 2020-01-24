@@ -18,4 +18,4 @@ export const initTriangleShape = (iX, iY) => {
   };
 };
 
-export const AXIS_LABEL_SIZE = "0.9em";
+export const AXIS_LABEL_SIZE = "1.1em";
