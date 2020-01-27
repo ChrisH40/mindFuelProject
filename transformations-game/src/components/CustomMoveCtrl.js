@@ -6,91 +6,94 @@ const CustomMoveCtrl = props => {
   const [translate, reflect, rotate] = props.movement;
 
   //-----------------------block code here-------------------------------------------------
-let [moves, setMoves] = useState([
-  { name: "Reflect Y axis ", category: "preStage", bgcolor: "yellow", moveType: "reflect", reflectX: 1, reflectY: 0, cre: 0},
-  { name: "Translate Y -16", category: "preStage", bgcolor: "pink", moveType: "translate", ixt:0, iyt: -16 },
-  { name: "Rotate 90 origin clockwise", category: "preStage", bgcolor: "skyblue", moveType: "rotate", ixro: 0, iyro: 0, rotateFactor: -90 }
-])
+  let [moves, setMoves] = useState([
+    { name: "Reflect Y axis ", category: "preStage", bgcolor: "yellow", moveType: "reflect", reflectX: 1, reflectY: 0, cre: 0 },
+    { name: "Translate Y -16", category: "preStage", bgcolor: "pink", moveType: "translate", ixt: 0, iyt: -16 },
+    { name: "Rotate 90 origin clockwise", category: "preStage", bgcolor: "skyblue", moveType: "rotate", ixro: 0, iyro: 0, rotateFactor: -90 }
+  ])
 
-let [runMove, setRunMove] = useState([])
+  let [runMove, setRunMove] = useState([])
 
-let onDragOver = (ev) => {
-  ev.preventDefault();
-}
-
-let onDragStart = (ev, name) => {
-  console.log("dragstart:", name);
-  ev.dataTransfer.setData("id", name);
-}
-
-let onDrop = (ev, category) => {
-  let name = ev.dataTransfer.getData("id");
-  let selectedMove = moves.filter(move => {
-    if (move.name === name) {
-      move.category = category
-      if(move.category === "staged" && move.moveType === "reflect"){
-        reflect(
-          props.triangleCoords,
-          move.reflectX,
-          move.reflectY,
-          move.cre
-        )
-      }
-      if(move.category === "staged" && move.moveType === "translate") {
-        translate(
-          props.triangleCoords,
-          move.ixt,
-          move.iyt
-        )
-      }
-      if(move.category === "staged" && move.moveType === "rotate") {
-        rotate(
-          props.triangleCoords,
-          move.ixro,
-          move.iyro,
-          move.rotateFactor
-        )
-      }
-    }
-  })
-  let updatedMoves = [...moves]; //copy old array data
-  
-  for (let item of updatedMoves) {
-    if ( item.name === selectedMove.name) {
-      item = selectedMove
-    }
+  let onDragOver = (ev) => {
+    ev.preventDefault();
   }
-  setMoves(updatedMoves)
-}
+
+  let onDragStart = (ev, name) => {
+    ev.dataTransfer.setData("id", name);
+  }
+
+  let onDrop = (ev, category) => {
+    let name = ev.dataTransfer.getData("id");
+    let selectedMove = moves.filter(move => {
+      if (move.name === name) {
+        move.category = category
+        if (move.category === "staged" && move.moveType === "reflect") {
+          reflect(
+            props.triangleCoords,
+            move.reflectX,
+            move.reflectY,
+            move.cre
+          )
+        }
+        if (move.category === "staged" && move.moveType === "translate") {
+          translate(
+            props.triangleCoords,
+            move.ixt,
+            move.iyt
+          )
+        }
+        if (move.category === "staged" && move.moveType === "rotate") {
+          rotate(
+            props.triangleCoords,
+            move.ixro,
+            move.iyro,
+            move.rotateFactor
+          )
+        }
+      }
+    })
+    let updatedMoves = [...moves]; //copy old array data
+
+    for (let item of updatedMoves) {
+      if (item.name === selectedMove.name) {
+        item = selectedMove
+      }
+    }
+    setMoves(updatedMoves)
+  }
 
 
 
-let displayMoves = {
-  preStage: [],
-  staged: []
-};
-moves.forEach(t => {
-  displayMoves[t.category].push(
-    <div
-      key={t.name}
-      onDragStart={e => onDragStart(e, t.name)}
-      draggable={t.category === "staged" ? "false" : "true"}
-      className="draggable"
-      style={{ backgroundColor: t.bgcolor }}
-    >
-      {t.name}
-    </div>
-  );
-  console.log(moves)
-});
+  let displayMoves = {
+    preStage: [],
+    staged: []
+  };
+  moves.forEach(t => {
+    displayMoves[t.category].push(
+      <div
+        key={t.name}
+        onDragStart={e => onDragStart(e, t.name)}
+        draggable={t.category === "staged" ? "false" : "true"}
+        className="draggable"
+        style={{ backgroundColor: t.bgcolor }}
+      >
+        {t.name}
+      </div>
+    );
+  });
 
 
   //-----------------------block code ends--------------------------------------------------
 
   return (
     <div>
-      <div className="top-container">
-        <h2 className="tc f3 pa0"> 😍 Make Some Cool Moves Here 😎</h2> 
+      <div
+        className="top-container preStage"
+        onDragOver={e => onDragOver(e)}
+        onDrop={e => {onDrop(e, "preStage");
+        }}
+      >
+        <h2 className="tc f3 pa0"> 😍 Make Some Cool Moves Here 😎</h2>
         {//original controller goes here
         }
         <div
@@ -99,24 +102,20 @@ moves.forEach(t => {
           onDrop={e => {
             onDrop(e, "preStage");
           }}
-          >
+        >
           <span className="move-header">Pre stage moves</span>
           {displayMoves.preStage}
-          </div>
+        </div>
       </div>
-      <div className="bottom-container">
-        
-        <div
-          className="droppable"
-          onDragOver={e => onDragOver(e)}
-          onDrop={e => onDrop(e, "staged")}
-          
-        >
-          <span className="move-header">Staged Moves</span>
-          {displayMoves.staged}
-      </div>
+      <div
+        className="bottom-container droppable"
+        onDragOver={e => onDragOver(e)}
+        onDrop={e => onDrop(e, "staged")}
 
-    </div>
+      >
+        <span className="move-header">Staged Moves</span>
+        {displayMoves.staged}
+      </div>
     </div>
   );
 };
