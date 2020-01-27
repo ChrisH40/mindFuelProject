@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/mindFuelProject/static/css/main.9a07d692.chunk.css",
+    "main.js": "/mindFuelProject/static/js/main.292459ce.chunk.js",
+    "main.js.map": "/mindFuelProject/static/js/main.292459ce.chunk.js.map",
+    "runtime-main.js": "/mindFuelProject/static/js/runtime-main.33d9676d.js",
+    "runtime-main.js.map": "/mindFuelProject/static/js/runtime-main.33d9676d.js.map",
+    "static/css/2.299a5230.chunk.css": "/mindFuelProject/static/css/2.299a5230.chunk.css",
+    "static/js/2.53865b0e.chunk.js": "/mindFuelProject/static/js/2.53865b0e.chunk.js",
+    "static/js/2.53865b0e.chunk.js.map": "/mindFuelProject/static/js/2.53865b0e.chunk.js.map",
+    "index.html": "/mindFuelProject/index.html",
+    "precache-manifest.522d4481327678e45d55ea309c51b28e.js": "/mindFuelProject/precache-manifest.522d4481327678e45d55ea309c51b28e.js",
+    "service-worker.js": "/mindFuelProject/service-worker.js",
+    "static/css/2.299a5230.chunk.css.map": "/mindFuelProject/static/css/2.299a5230.chunk.css.map",
+    "static/css/main.9a07d692.chunk.css.map": "/mindFuelProject/static/css/main.9a07d692.chunk.css.map",
+    "static/js/2.53865b0e.chunk.js.LICENSE": "/mindFuelProject/static/js/2.53865b0e.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.33d9676d.js",
+    "static/css/2.299a5230.chunk.css",
+    "static/js/2.53865b0e.chunk.js",
+    "static/css/main.9a07d692.chunk.css",
+    "static/js/main.292459ce.chunk.js"
+  ]
+}
