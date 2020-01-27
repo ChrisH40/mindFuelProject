@@ -80,7 +80,10 @@ const CustomMoveCtrl = props => {
         {t.name}
       </div>
     );
+
+
   });
+
 
 
   //-----------------------block code ends--------------------------------------------------
@@ -90,7 +93,8 @@ const CustomMoveCtrl = props => {
       <div
         className="top-container preStage"
         onDragOver={e => onDragOver(e)}
-        onDrop={e => {onDrop(e, "preStage");
+        onDrop={e => {
+          onDrop(e, "preStage");
         }}
       >
         <h2 className="tc f3 pa0"> 😍 Make Some Cool Moves Here 😎</h2>
