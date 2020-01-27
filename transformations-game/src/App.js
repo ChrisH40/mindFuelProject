@@ -14,6 +14,9 @@ const App = () => {
   let [coords, setCoords] = useState(initTriangleShape(x1, y1));
   let [win, setWin] = useState(false);
 
+  const handleRestart = () => {
+    window.location.reload(true);
+  };
 
   const translate = (triangleCoords, xUnit, yUnit) => {
     let transformedCoords = m.translate(triangleCoords, xUnit, yUnit);
@@ -39,13 +42,23 @@ const App = () => {
       setWin(true);
     }
     else return;
-  }
+  };
+
+  const Popup = () => (
+    <div className='popup'>
+      <div className='popup_inner'>
+        <h1>You Win!</h1>
+        <button className="restart-button" onClick={() => handleRestart()}>Play Again?</button>
+      </div>
+    </div>
+  );
 
   return (
     <div className="App">
       <div className="Canvas">
         <LevelOne
-          triangleCoords={coords} />
+          triangleCoords={coords}
+          win={win} />
       </div>
       <div className="right-container">
         <CustomMoveCtrl
@@ -53,7 +66,11 @@ const App = () => {
           movement={[translate, reflect, rotate]}
         />
       </div>
+      <div>
+        {win === true ? <Popup /> : null}
+      </div>
     </div>
+
   )
 };
 

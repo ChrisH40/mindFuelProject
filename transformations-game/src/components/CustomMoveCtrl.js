@@ -7,20 +7,18 @@ const CustomMoveCtrl = props => {
 
   //-----------------------block code here-------------------------------------------------
   let [moves, setMoves] = useState([
-    { name: "Reflect Y axis ", category: "preStage", bgcolor: "yellow", moveType: "reflect", reflectX: 1, reflectY: 0, cre: 0 },
-    { name: "Translate Y -16", category: "preStage", bgcolor: "pink", moveType: "translate", ixt: 0, iyt: -16 },
-    { name: "Rotate 90 origin clockwise", category: "preStage", bgcolor: "skyblue", moveType: "rotate", ixro: 0, iyro: 0, rotateFactor: -90 }
-  ])
-
-  let [runMove, setRunMove] = useState([])
+    { name: "Reflect Y Axis ", category: "preStage", bgcolor: "yellow", moveType: "reflect", reflectX: 1, reflectY: 0, cre: 0 },
+    { name: "Translate Y Axis -16", category: "preStage", bgcolor: "pink", moveType: "translate", ixt: 0, iyt: -16 },
+    { name: "Rotate 90° Origin (0, 0) Clockwise", category: "preStage", bgcolor: "skyblue", moveType: "rotate", ixro: 0, iyro: 0, rotateFactor: -90 }
+  ]);
 
   let onDragOver = (ev) => {
     ev.preventDefault();
-  }
+  };
 
   let onDragStart = (ev, name) => {
     ev.dataTransfer.setData("id", name);
-  }
+  };
 
   let onDrop = (ev, category) => {
     let name = ev.dataTransfer.getData("id");
@@ -60,7 +58,7 @@ const CustomMoveCtrl = props => {
       }
     }
     setMoves(updatedMoves)
-  }
+  };
 
 
 
@@ -72,16 +70,14 @@ const CustomMoveCtrl = props => {
     displayMoves[t.category].push(
       <div
         key={t.name}
-        onDragStart={e => onDragStart(e, t.name)}
-        draggable={t.category === "staged" ? "false" : "true"}
+        onDragStart={t.category === "staged" ? null : e => onDragStart(e, t.name)}
+        draggable
         className="draggable"
         style={{ backgroundColor: t.bgcolor }}
       >
         {t.name}
       </div>
     );
-
-
   });
 
 

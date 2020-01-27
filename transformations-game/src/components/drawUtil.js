@@ -1,16 +1,21 @@
 import { SIZE, GRID_MARGIN, DIMENSION, AXIS_LABEL_SIZE } from "./settings";
+
 const cellSize = Math.floor(SIZE / DIMENSION);
+
 export default {
+
   getCanvasXYOffset: canvas => {
     return {
       x: Math.floor(canvas.getBoundingClientRect().x),
       y: Math.floor(canvas.getBoundingClientRect().y)
     };
   },
+
   drawDot: (x = GRID_MARGIN, y = GRID_MARGIN, ctx) => {
     ctx.fillStyle = "orange";
     ctx.fillRect(x, y, 10, 10);
   },
+
   drawGrid: ({
     ctx,
     x = GRID_MARGIN,
@@ -55,6 +60,7 @@ export default {
     }
     ctx.stroke();
   },
+
   drawAxis: ({
     ctx,
     x = GRID_MARGIN,
@@ -71,6 +77,7 @@ export default {
     ctx.strokeStyle = lineStyle;
     ctx.stroke();
   },
+
   drawTriangle: ({ x1, y1, x2, y2, x3, y3, ctx, lineStyle, fillStyle }) => {
     ctx.beginPath();
     ctx.strokeStyle = lineStyle;

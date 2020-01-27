@@ -1,5 +1,33 @@
 # Dev Notes
 
+### 2020-01-27
+
+<img src="./transformations-game/screenshots/2020-01-27A.PNG" 
+alt="status20200127" width='50%' height="auto" />
+
+<img src="./transformations-game/screenshots/2020-01-27B.PNG" 
+alt="status20200127" width='50%' height="auto" />
+
+### Features
+
+- Drag and Drop UI + Functionality
+- Winning Logic
+
+
+### To implement next
+
+- Front end:
+  - Collision Detection
+  - Losing Logic
+  - Visual Improvements
+  - Transition b/t Levels
+  - Starting Page
+  - Background Effects
+  - Shape Animations
+
+- Back end
+  - User sign in
+
 ### 2020-01-23
 
 <img src="./transformations-game/screenshots/2020-01-23.PNG" 

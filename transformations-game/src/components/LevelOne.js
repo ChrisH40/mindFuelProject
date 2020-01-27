@@ -24,6 +24,7 @@ class LevelOne extends React.Component {
           triangleCoords={this.props.triangleCoords}
           target={this.props.target}
           width={SIZE + GRID_MARGIN * 2}
+          win={this.props.win}
         />
       </div>
     );
