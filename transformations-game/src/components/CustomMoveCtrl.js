@@ -74,146 +74,226 @@ const CustomMoveCtrl = props => {
     }
   };
 
+  //-----------------------block code here-------------------------------------------------
+let [moves, setMoves] = useState([
+  { name: "Move 1", category: "preStage", bgcolor: "yellow" },
+  { name: "Move 2", category: "preStage", bgcolor: "pink" },
+  { name: "Move 3", category: "preStage", bgcolor: "skyblue" }
+])
+
+let onDragOver = (ev) => {
+  ev.preventDefault();
+}
+
+let onDragStart = (ev, name) => {
+  console.log("dragstart:", name);
+  ev.dataTransfer.setData("id", name);
+}
+
+let onDrop = (ev, category) => {
+  let name = ev.dataTransfer.getData("id");
+  let selectedMove = moves.filter(move => {
+    if (move.name === name) {
+      move.category = category
+    }
+    
+  })
+  let updatedMoves = [...moves]; //copy old array data
+  for (let item of updatedMoves) {
+    if ( item.name === selectedMove.name) {
+      item = selectedMove
+    }
+  }
+  setMoves(updatedMoves)
+}
+
+let displayMoves = {
+  preStage: [],
+  staged: []
+};
+moves.forEach(t => {
+  displayMoves[t.category].push(
+    <div
+      key={t.name}
+      onDragStart={e => onDragStart(e, t.name)}
+      draggable
+      className="draggable"
+      style={{ backgroundColor: t.bgcolor }}
+    >
+      {t.name}
+    </div>
+  );
+  console.log(moves)
+});
+
+
+  //-----------------------bock code ends--------------------------------------------------
+
   return (
     <div>
-      <div>
-        <h2 className="tc f3 pa0"> 😍 Make Some Cool Moves Here 😎</h2>
+      <div className="top-container">
+        <h2 className="tc f3 pa0"> 😍 Make Some Cool Moves Here 😎</h2> 
+        {//original controller goes here
+        }
+        <div
+          className="preStage"
+          onDragOver={e => onDragOver(e)}
+          onDrop={e => {
+            onDrop(e, "preStage");
+          }}
+          >
+          <span className="move-header">Pre stage moves</span>
+          {displayMoves.preStage}
+          </div>
       </div>
-      {/* <div className="tc custom-ops"> */}
-      <div className="translate-container bg-washed-red">
-        {/* <div className="translate ma2 bg-washed-red"> */}
-        <text className="menu-header">Translate</text><br />
-        <label htmlFor="xUnitt">
-          X:
-          <input
-            className="menu-item"
-            type="number"
-            min={-DIMENSION / 2}
-            max={DIMENSION / 2}
-            id="xUnitt"
-            ref={ixt}
-            defaultValue="0"
-          />
-        </label>
-        <label htmlFor="yUnitt">
-          Y:
-          <input
-            className="menu-item"
-            type="number"
-            id="yUnitt"
-            min={-DIMENSION / 2}
-            max={DIMENSION / 2}
-            ref={iyt}
-            defaultValue="0"
-          />
-        </label>
-        <br />
-        <button className="menu-button" onClick={handleTranslate}>Translate</button>
-        {/* </div> */}
+      <div className="bottom-container">
+        Bottom Menu
+        <div
+          className="droppable"
+          onDragOver={e => onDragOver(e)}
+          onDrop={e => onDrop(e, "staged")}
+        >
+          <span className="move-header">Staged Moves</span>
+          {displayMoves.staged}
       </div>
-      <div className="rotate-container bg-washed-green">
-        {/* <div className="rotate ma2 bg-washed-green"> */}
-        <text className="menu-header">Rotate 90°</text><br />
-        <label htmlFor="degro">
-          Clockwise
-              <input
-            className="menu-item"
-            type="radio"
-            value="optionClockwise"
-            checked={rotateDirection === "optionClockwise"}
-            onChange={(event) => { setRotateDirection(event.target.value) }} />
-          Counter Clockwise
-              <input
-            className="menu-item"
-            type="radio"
-            value="optionCounterClockwise"
-            checked={rotateDirection === "optionCounterClockwise"}
-            onChange={(event) => { setRotateDirection(event.target.value) }} />
-          Factor
-              <select
-            className="menu-item"
-            onChange={(event) => { setRotateFactor(event.target.value) }}
-            value={rotateFactor}
-            defaultValue="90">
-            <option value="90">1</option>
-            <option value="180">2</option>
-            <option value="270">3</option>
-            <option value="360">4</option>
-          </select>
-          <br />
-          Focal Point&nbsp;
-              <label htmlFor="xUnitro">
-            X:
-              <input
-              className="menu-item"
-              type="number"
-              min={-DIMENSION / 2}
-              max={DIMENSION / 2}
-              id="xUnitro"
-              ref={ixro}
-              defaultValue="0"
-            />
-          </label>
-          <label htmlFor="yUnitro">
-            Y:
-              <input
-              className="menu-item"
-              type="number"
-              min={-DIMENSION / 2}
-              max={DIMENSION / 2}
-              id="yUnitro"
-              ref={iyro}
-              defaultValue="0"
-            />
-          </label>
-          {/* deg:
-              <input type="number" id="degro" ref={degro} defaultValue="90" /> */}
-        </label>
-        {/* </div> */}
-        <br />
-        <button className="menu-button" onClick={handleRotate}>Rotate</button>
-      </div>
-      <div className="reflect-container bg-lightest-blue">
-        {/* <div className="reflect ma2 bg-lightest-blue"> */}
-        <text className="menu-header">Reflect</text><br />
-        <label htmlFor="are">
-          X-Axis
-              <input
-            className="menu-item"
-            type="radio"
-            value="optionX"
-            checked={reflectAxis === 'optionX'}
-            onChange={(event) => { setReflectAxis(event.target.value) }} />
-        </label>
-        {/* <span className="f4">or</span> */}
-        <label htmlFor="bre">
-          Y-Axis
-              <input
-            className="menu-item"
-            type="radio"
-            value="optionY"
-            checked={reflectAxis === 'optionY'}
-            onChange={(event) => { setReflectAxis(event.target.value) }} />
-        </label>
-        <label htmlFor="cre">
-          <input
-            className="menu-item"
-            type="number"
-            min={-DIMENSION / 2}
-            max={DIMENSION / 2}
-            id="cre"
-            ref={cre}
-            defaultValue="0"
-          />
-          + / -
-            </label>
-        <br />
-        <button className="menu-button" onClick={handleReflect}>Reflect</button>
-        {/* </div> */}
-      </div>
-      {/* </div> */}
-    </div >
+
+    </div>
+    </div>
   );
 };
 
 export default CustomMoveCtrl;
+
+      // {/* <div className="tc custom-ops"> */}
+      // <div className="translate-container bg-washed-red">
+      //   {/* <div className="translate ma2 bg-washed-red"> */}
+      //   <text className="menu-header">Translate</text><br />
+      //   <label htmlFor="xUnitt">
+      //     X:
+      //     <input
+      //       className="menu-item"
+      //       type="number"
+      //       min={-DIMENSION / 2}
+      //       max={DIMENSION / 2}
+      //       id="xUnitt"
+      //       ref={ixt}
+      //       defaultValue="0"
+      //     />
+      //   </label>
+      //   <label htmlFor="yUnitt">
+      //     Y:
+      //     <input
+      //       className="menu-item"
+      //       type="number"
+      //       id="yUnitt"
+      //       min={-DIMENSION / 2}
+      //       max={DIMENSION / 2}
+      //       ref={iyt}
+      //       defaultValue="0"
+      //     />
+      //   </label>
+      //   <br />
+      //   <button className="menu-button" onClick={handleTranslate}>Translate</button>
+      //   {/* </div> */}
+      // </div>
+      // <div className="rotate-container bg-washed-green">
+      //   {/* <div className="rotate ma2 bg-washed-green"> */}
+      //   <text className="menu-header">Rotate 90°</text><br />
+      //   <label htmlFor="degro">
+      //     Clockwise
+      //         <input
+      //       className="menu-item"
+      //       type="radio"
+      //       value="optionClockwise"
+      //       checked={rotateDirection === "optionClockwise"}
+      //       onChange={(event) => { setRotateDirection(event.target.value) }} />
+      //     Counter Clockwise
+      //         <input
+      //       className="menu-item"
+      //       type="radio"
+      //       value="optionCounterClockwise"
+      //       checked={rotateDirection === "optionCounterClockwise"}
+      //       onChange={(event) => { setRotateDirection(event.target.value) }} />
+      //     Factor
+      //         <select
+      //       className="menu-item"
+      //       onChange={(event) => { setRotateFactor(event.target.value) }}
+      //       value={rotateFactor}
+      //       defaultValue="90">
+      //       <option value="90">1</option>
+      //       <option value="180">2</option>
+      //       <option value="270">3</option>
+      //       <option value="360">4</option>
+      //     </select>
+      //     <br />
+      //     Focal Point&nbsp;
+      //         <label htmlFor="xUnitro">
+      //       X:
+      //         <input
+      //         className="menu-item"
+      //         type="number"
+      //         min={-DIMENSION / 2}
+      //         max={DIMENSION / 2}
+      //         id="xUnitro"
+      //         ref={ixro}
+      //         defaultValue="0"
+      //       />
+      //     </label>
+      //     <label htmlFor="yUnitro">
+      //       Y:
+      //         <input
+      //         className="menu-item"
+      //         type="number"
+      //         min={-DIMENSION / 2}
+      //         max={DIMENSION / 2}
+      //         id="yUnitro"
+      //         ref={iyro}
+      //         defaultValue="0"
+      //       />
+      //     </label>
+      //     {/* deg:
+      //         <input type="number" id="degro" ref={degro} defaultValue="90" /> */}
+      //   </label>
+      //   {/* </div> */}
+      //   <br />
+      //   <button className="menu-button" onClick={handleRotate}>Rotate</button>
+      // </div>
+      // <div className="reflect-container bg-lightest-blue">
+      //   {/* <div className="reflect ma2 bg-lightest-blue"> */}
+      //   <text className="menu-header">Reflect</text><br />
+      //   <label htmlFor="are">
+      //     X-Axis
+      //         <input
+      //       className="menu-item"
+      //       type="radio"
+      //       value="optionX"
+      //       checked={reflectAxis === 'optionX'}
+      //       onChange={(event) => { setReflectAxis(event.target.value) }} />
+      //   </label>
+      //   {/* <span className="f4">or</span> */}
+      //   <label htmlFor="bre">
+      //     Y-Axis
+      //         <input
+      //       className="menu-item"
+      //       type="radio"
+      //       value="optionY"
+      //       checked={reflectAxis === 'optionY'}
+      //       onChange={(event) => { setReflectAxis(event.target.value) }} />
+      //   </label>
+      //   <label htmlFor="cre">
+      //     <input
+      //       className="menu-item"
+      //       type="number"
+      //       min={-DIMENSION / 2}
+      //       max={DIMENSION / 2}
+      //       id="cre"
+      //       ref={cre}
+      //       defaultValue="0"
+      //     />
+      //     + / -
+      //       </label>
+      //   <br />
+      //   <button className="menu-button" onClick={handleReflect}>Reflect</button>
+      //   {/* </div> */}
+      // </div>
+      // {/* </div> */}

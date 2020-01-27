@@ -33,16 +33,11 @@ const App = () => {
           triangleCoords={coords} />
       </div>
       <div className="right-container">
-        <div className="top-container">
           <CustomMoveCtrl
             triangleCoords={coords}
             movement={[translate, reflect, rotate]}
           />
         </div>
-        <div className="bottom-container">
-          Bottom Menu
-        </div>
-      </div>
     </div>
   )
 };
