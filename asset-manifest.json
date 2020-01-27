@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/mindFuelProject/static/css/main.9a07d692.chunk.css",
-    "main.js": "/mindFuelProject/static/js/main.292459ce.chunk.js",
-    "main.js.map": "/mindFuelProject/static/js/main.292459ce.chunk.js.map",
-    "runtime-main.js": "/mindFuelProject/static/js/runtime-main.33d9676d.js",
-    "runtime-main.js.map": "/mindFuelProject/static/js/runtime-main.33d9676d.js.map",
-    "static/css/2.299a5230.chunk.css": "/mindFuelProject/static/css/2.299a5230.chunk.css",
-    "static/js/2.53865b0e.chunk.js": "/mindFuelProject/static/js/2.53865b0e.chunk.js",
-    "static/js/2.53865b0e.chunk.js.map": "/mindFuelProject/static/js/2.53865b0e.chunk.js.map",
-    "index.html": "/mindFuelProject/index.html",
-    "precache-manifest.522d4481327678e45d55ea309c51b28e.js": "/mindFuelProject/precache-manifest.522d4481327678e45d55ea309c51b28e.js",
-    "service-worker.js": "/mindFuelProject/service-worker.js",
-    "static/css/2.299a5230.chunk.css.map": "/mindFuelProject/static/css/2.299a5230.chunk.css.map",
-    "static/css/main.9a07d692.chunk.css.map": "/mindFuelProject/static/css/main.9a07d692.chunk.css.map",
-    "static/js/2.53865b0e.chunk.js.LICENSE": "/mindFuelProject/static/js/2.53865b0e.chunk.js.LICENSE"
+    "main.css": "/mindFuelProject/transformations-game/static/css/main.9a07d692.chunk.css",
+    "main.js": "/mindFuelProject/transformations-game/static/js/main.771f4cc0.chunk.js",
+    "main.js.map": "/mindFuelProject/transformations-game/static/js/main.771f4cc0.chunk.js.map",
+    "runtime-main.js": "/mindFuelProject/transformations-game/static/js/runtime-main.8c367599.js",
+    "runtime-main.js.map": "/mindFuelProject/transformations-game/static/js/runtime-main.8c367599.js.map",
+    "static/css/2.299a5230.chunk.css": "/mindFuelProject/transformations-game/static/css/2.299a5230.chunk.css",
+    "static/js/2.53865b0e.chunk.js": "/mindFuelProject/transformations-game/static/js/2.53865b0e.chunk.js",
+    "static/js/2.53865b0e.chunk.js.map": "/mindFuelProject/transformations-game/static/js/2.53865b0e.chunk.js.map",
+    "index.html": "/mindFuelProject/transformations-game/index.html",
+    "precache-manifest.c6891981052b17633e06a5e17afe0d89.js": "/mindFuelProject/transformations-game/precache-manifest.c6891981052b17633e06a5e17afe0d89.js",
+    "service-worker.js": "/mindFuelProject/transformations-game/service-worker.js",
+    "static/css/2.299a5230.chunk.css.map": "/mindFuelProject/transformations-game/static/css/2.299a5230.chunk.css.map",
+    "static/css/main.9a07d692.chunk.css.map": "/mindFuelProject/transformations-game/static/css/main.9a07d692.chunk.css.map",
+    "static/js/2.53865b0e.chunk.js.LICENSE": "/mindFuelProject/transformations-game/static/js/2.53865b0e.chunk.js.LICENSE"
   },
   "entrypoints": [
-    "static/js/runtime-main.33d9676d.js",
+    "static/js/runtime-main.8c367599.js",
     "static/css/2.299a5230.chunk.css",
     "static/js/2.53865b0e.chunk.js",
     "static/css/main.9a07d692.chunk.css",
-    "static/js/main.292459ce.chunk.js"
+    "static/js/main.771f4cc0.chunk.js"
   ]
 }
