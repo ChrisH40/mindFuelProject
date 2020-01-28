@@ -8,6 +8,7 @@
 }
 
 body {
+  height: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -21,10 +22,20 @@ code {
     monospace;
 }
 
+.Canvas {
+  display: flex;
+  flex-direction: column;
+  width: 100vh;
+  height: 100vh;
+  padding: 10px;
+  
+}
+
 .right-container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, 1fr);
+  height: 100vh;
 }
 
 .top-container,
@@ -35,11 +46,20 @@ code {
   border: 1px solid black;
   margin: 5px;
   padding: 5px;
+  position: relative;
 }
 
-.preState,
+
+.preStage,
 .droppable {
   height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  overflow: auto;
+  
+
 }
 
 .move-header {
@@ -49,7 +69,13 @@ code {
 }
 
 .draggable {
-  margin-top: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .draggable:hover {
@@ -64,15 +90,16 @@ code {
 }
 
 .translate {
-  background-color: yellow;
+  background-color:#b6cbe6;
 }
 
 .rotate {
-  background-color:skyblue;
+  background-color:  #e7edf7;
+;
 }
 
 .reflect {
-  background-color:pink;
+  background-color: #6699cc;
 }
 
 .popup {  
