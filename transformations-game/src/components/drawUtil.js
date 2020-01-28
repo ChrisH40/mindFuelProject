@@ -78,7 +78,7 @@ export default {
     ctx.stroke();
   },
 
-  drawTriangle: ({ x1, y1, x2, y2, x3, y3, ctx, lineStyle, fillStyle }) => {
+  drawTriangle: ({ x1, y1, x2, y2, x3, y3, ctx, lineStyle, fillStyle}) => {
     ctx.beginPath();
     ctx.strokeStyle = lineStyle;
     ctx.fillStyle = fillStyle;
@@ -89,4 +89,10 @@ export default {
     ctx.stroke();
     ctx.fill();
   },
+
+  drawText: ({ ctx, fillStyle, text }) => {
+    ctx.fillStyle = fillStyle;
+    ctx.font = "30px Arial";
+    ctx.fillText(text.text, text.x, text.y);   
+  }
 };

@@ -26,6 +26,7 @@ const Canvas = props => {
         ctx,
         lineStyle: (props.lose === true ? "red" : "rgb(155,189,238)"),
         fillStyle: (props.lose === true ? "red" : "rgba(155, 189,238,0.8)"),
+        text: { text: "", x: null, y: null } 
       });
       // draw target triangle
       d.drawTriangle({
@@ -33,6 +34,12 @@ const Canvas = props => {
         ctx,
         lineStyle: (props.win === true ? "greenyellow" : "rgb(188,198,34)"),
         fillStyle: (props.win === true ? "greenyellow" : "rgba(188,198,34, 0.8)"),
+      });
+      // draw exit text
+      d.drawText({
+        ctx,
+        fillStyle: "black",
+        text: { text:"Exit", x: 740, y: 760 }
       });
     }
   });
