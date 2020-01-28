@@ -37,9 +37,9 @@ export default {
       ctx.fillStyle = labelFillStyle;
       ctx.fillText(
         `${
-          i == DIMENSION / 2
-            ? ""
-            : i < DIMENSION / 2
+        i === DIMENSION / 2
+          ? ""
+          : i < DIMENSION / 2
             ? DIMENSION / 2 - i
             : -i + DIMENSION / 2
         }`,
@@ -88,5 +88,5 @@ export default {
     ctx.closePath();
     ctx.stroke();
     ctx.fill();
-  }
+  },
 };

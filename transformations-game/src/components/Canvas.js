@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import "./Canvas.css";
 import d from "./drawUtil";
 import { mapToCanvasCoords } from "./moveUtil";
+import "./Canvas.css";
 import "tachyons";
 
 const Canvas = props => {
@@ -19,41 +19,23 @@ const Canvas = props => {
         lineStyle: "#ddd",
         fillStyle: "rgba(0,0,0,.2)"
       });
-
       d.drawAxis({ ctx, lineStyle: "#000" });
-      
-      if (props.win === false) {
-        d.drawTriangle({
-          ...props.triangleCoords,
-          ctx,
-          lineStyle: "rgb(155,189,238)",
-          fillStyle: "rgba(155, 189,238,0.8)"
-        });
-        // draw target triangle
-        d.drawTriangle({
-          ...mapToCanvasCoords(props.target),
-          ctx,
-          lineStyle: "rgb(188,198,34)",
-          fillStyle: "rgba(188,198,34, 0.8)"
-        });
-      }
-      else if (props.win === true) {
-        d.drawTriangle({
-          ...props.triangleCoords,
-          ctx,
-          lineStyle: "greenyellow",
-          fillStyle: "greenyellow"
-        });
-        // draw target triangle
-        d.drawTriangle({
-          ...mapToCanvasCoords(props.target),
-          ctx,
-          lineStyle: "greenyellow",
-          fillStyle: "greenyellow"
-        });
-      }
+      // draw starting triangle
+      d.drawTriangle({
+        ...props.triangleCoords,
+        ctx,
+        lineStyle: (props.lose === true ? "red" : "rgb(155,189,238)"),
+        fillStyle: (props.lose === true ? "red" : "rgba(155, 189,238,0.8)"),
+      });
+      // draw target triangle
+      d.drawTriangle({
+        ...mapToCanvasCoords(props.target),
+        ctx,
+        lineStyle: (props.win === true ? "greenyellow" : "rgb(188,198,34)"),
+        fillStyle: (props.win === true ? "greenyellow" : "rgba(188,198,34, 0.8)"),
+      });
     }
-  }, [props.triangleCoords]);
+  });
 
   return (
     <canvas

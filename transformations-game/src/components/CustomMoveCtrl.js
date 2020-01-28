@@ -1,19 +1,13 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import "tachyons";
-import { SIZE, GRID_MARGIN, DIMENSION, initTriangleShape } from "./settings";
 
 const CustomMoveCtrl = props => {
   const [translate, reflect, rotate] = props.movement;
 
-  //-----------------------block code here-------------------------------------------------
-  let [moves, setMoves] = useState([
-    { name: "Reflect Y Axis ", category: "preStage", bgcolor: "yellow", moveType: "reflect", reflectX: 1, reflectY: 0, cre: 0 },
-    { name: "Translate Y Axis -16", category: "preStage", bgcolor: "pink", moveType: "translate", ixt: 0, iyt: -16 },
-    { name: "Rotate 90° Origin (0, 0) Clockwise", category: "preStage", bgcolor: "skyblue", moveType: "rotate", ixro: 0, iyro: 0, rotateFactor: -90 }
-  ]);
-
+  //-----------------------block code starts--------------------------------------------------
   let onDragOver = (ev) => {
     ev.preventDefault();
+    ev.target.style.cursor = "grabbing"
   };
 
   let onDragStart = (ev, name) => {
@@ -22,7 +16,7 @@ const CustomMoveCtrl = props => {
 
   let onDrop = (ev, category) => {
     let name = ev.dataTransfer.getData("id");
-    let selectedMove = moves.filter(move => {
+    let selectedMove = props.moves.filter(move => {
       if (move.name === name) {
         move.category = category
         if (move.category === "staged" && move.moveType === "reflect") {
@@ -50,52 +44,42 @@ const CustomMoveCtrl = props => {
         }
       }
     })
-    let updatedMoves = [...moves]; //copy old array data
+    let updatedMoves = [...props.moves]; //copy old array data
 
     for (let item of updatedMoves) {
       if (item.name === selectedMove.name) {
         item = selectedMove
       }
     }
-    setMoves(updatedMoves)
+    props.setMoves(updatedMoves)
   };
-
-
 
   let displayMoves = {
     preStage: [],
     staged: []
   };
-  moves.forEach(t => {
+  props.moves.forEach(t => {
     displayMoves[t.category].push(
       <div
         key={t.name}
         onDragStart={t.category === "staged" ? null : e => onDragStart(e, t.name)}
         draggable
-        className="draggable"
-        style={{ backgroundColor: t.bgcolor }}
+        className={"draggable " + t.style}
       >
         {t.name}
       </div>
     );
   });
 
-
-
   //-----------------------block code ends--------------------------------------------------
 
   return (
     <div>
-      <div
-        className="top-container preStage"
-        onDragOver={e => onDragOver(e)}
-        onDrop={e => {
-          onDrop(e, "preStage");
-        }}
-      >
+      <div className="top-container">
         <h2 className="tc f3 pa0"> 😍 Make Some Cool Moves Here 😎</h2>
         {//original controller goes here
         }
+        <span className="move-header">Pre-Staged Moves</span>
         <div
           className="preStage"
           onDragOver={e => onDragOver(e)}
@@ -103,18 +87,19 @@ const CustomMoveCtrl = props => {
             onDrop(e, "preStage");
           }}
         >
-          <span className="move-header">Pre stage moves</span>
           {displayMoves.preStage}
         </div>
       </div>
-      <div
-        className="bottom-container droppable"
-        onDragOver={e => onDragOver(e)}
-        onDrop={e => onDrop(e, "staged")}
-
-      >
+      <div className="bottom-container">
         <span className="move-header">Staged Moves</span>
-        {displayMoves.staged}
+        <div
+          className="droppable"
+          onDragOver={e => onDragOver(e)}
+          onDrop={e =>
+            onDrop(e, "staged")}
+        >
+          {displayMoves.staged}
+        </div>
       </div>
     </div>
   );

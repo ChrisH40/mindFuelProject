@@ -1,10 +1,4 @@
-import {
-  SIZE,
-  UNIT,
-  GRID_MARGIN,
-  DIMENSION,
-  initTriangleShape
-} from "./settings";
+import { SIZE, UNIT, GRID_MARGIN } from "./settings";
 
 // Object.size = obj => {
 //   let size = 0,
@@ -15,8 +9,8 @@ import {
 //   return size;
 // };
 
+// const round = Math.round;
 const PI = Math.PI;
-const round = Math.round;
 
 export const mapToCanvasCoordsFromPixel = gameCoordsInPixel => {
   const mapped = {};
