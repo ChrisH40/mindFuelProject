@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import d from "./drawUtil";
-import { mapToCanvasCoords } from "./moveUtil";
 import "./Canvas.css";
 import "tachyons";
 
@@ -22,15 +21,14 @@ const Canvas = props => {
       d.drawAxis({ ctx, lineStyle: "#000" });
       // draw starting triangle
       d.drawTriangle({
-        ...props.triangleCoords,
+        ...props.current,
         ctx,
         lineStyle: (props.lose === true ? "red" : "rgb(155,189,238)"),
         fillStyle: (props.lose === true ? "red" : "rgba(155, 189,238,0.8)"),
-        text: { text: "", x: null, y: null } 
       });
       // draw target triangle
       d.drawTriangle({
-        ...mapToCanvasCoords(props.target),
+        ...props.target,
         ctx,
         lineStyle: (props.win === true ? "greenyellow" : "rgb(188,198,34)"),
         fillStyle: (props.win === true ? "greenyellow" : "rgba(188,198,34, 0.8)"),
@@ -39,7 +37,7 @@ const Canvas = props => {
       d.drawText({
         ctx,
         fillStyle: "black",
-        text: { text:"Exit", x: 740, y: 760 }
+        text: { text: "Exit", x: 740, y: 760 }
       });
     }
   });

@@ -16,7 +16,8 @@ const CustomMoveCtrl = props => {
 
   let onDrop = (ev, category) => {
     let name = ev.dataTransfer.getData("id");
-    let selectedMove = props.moves.filter(move => {
+    // let selectedMove = 
+    props.moves.filter(move => {
       if (move.name === name) {
         move.category = category;
         if (move.category === "staged" && move.moveType === "reflect") {
@@ -32,12 +33,12 @@ const CustomMoveCtrl = props => {
     });
     let updatedMoves = [...props.moves]; //copy old array data
 
-    for (let item of updatedMoves) {
-      if (item.name === selectedMove.name) {
-        item = selectedMove;
-      }
-    }
-    props.setMoves(updatedMoves);
+    // for (let item of updatedMoves) {
+    //   if (item.name === selectedMove.name) {
+    //     item = selectedMove;
+    //   }
+    // }
+    // props.setMoves(updatedMoves);
   };
 
   let displayMoves = {
@@ -49,7 +50,7 @@ const CustomMoveCtrl = props => {
       <div
         key={t.name}
         onDragStart={
-          t.category === "staged" ? null : e => onDragStart(e, t.name)
+          t.category === "staged" || props.moving === true ? null : e => onDragStart(e, t.name)
         }
         draggable
         className={"draggable " + t.style + " tc f5 pa0"}

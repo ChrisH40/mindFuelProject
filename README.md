@@ -1,5 +1,29 @@
 # Dev Notes
 
+### 2020-01-29
+
+<img src="./transformations-game/screenshots/2020-01-29.PNG" 
+alt="status20200129" width='50%' height="auto" />
+
+### Features
+
+- Transform, Rotate Animations
+- Out of Bounds Lose Condition
+- CSS, Visual Improvements
+
+
+### To implement next
+
+- Front end:
+  - Collision Detection
+  - Visual Improvements
+  - Transition b/t Levels
+  - Starting Page
+  - Background Effects
+
+- Back end
+  - User sign in
+
 ### 2020-01-27
 
 <img src="./transformations-game/screenshots/2020-01-27A.PNG" 

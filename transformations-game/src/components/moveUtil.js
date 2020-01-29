@@ -93,8 +93,8 @@ export default {
     let cosDeg = Math.cos((deg / 180) * PI);
     coords = reorgCoords(mapToGameCoords(coords));
     for (let [idx, pt] of Object.entries(coords)) {
-      rotated[`x${idx}`] = (pt.x - xr) * cosDeg - (pt.y - yr) * sinDeg + xr;
-      rotated[`y${idx}`] = (pt.x - xr) * sinDeg + (pt.y - yr) * cosDeg + yr;
+      rotated[`x${idx}`] = Math.round((pt.x - xr) * cosDeg - (pt.y - yr) * sinDeg + xr);
+      rotated[`y${idx}`] = Math.round((pt.x - xr) * sinDeg + (pt.y - yr) * cosDeg + yr);
     }
     return mapToCanvasCoords(rotated);
   },
@@ -104,9 +104,9 @@ export default {
     const translated = {};
     for (let [key, value] of Object.entries(coords)) {
       if (key.includes("x")) {
-        translated[key] = value + xu * UNIT;
+        translated[key] = Math.round(value + xu * UNIT);
       } else {
-        translated[key] = value + yu * UNIT;
+        translated[key] = Math.round(value + yu * UNIT);
       }
     }
     return mapToCanvasCoordsFromPixel(translated);
@@ -117,11 +117,11 @@ export default {
     coords = reorgCoords(mapToGameCoords(coords));
     for (let [idx, pt] of Object.entries(coords)) {
       reflected[`x${idx}`] =
-        ((b * b - a * a) * pt.x - 2 * a * b * pt.y - 2 * a * c) /
-        (a * a + b * b);
+        Math.round(((b * b - a * a) * pt.x - 2 * a * b * pt.y - 2 * a * c) /
+          (a * a + b * b));
       reflected[`y${idx}`] =
-        ((a * a - b * b) * pt.y - 2 * a * b * pt.x - 2 * b * c) /
-        (a * a + b * b);
+        Math.round(((a * a - b * b) * pt.y - 2 * a * b * pt.x - 2 * b * c) /
+          (a * a + b * b));
     }
     return mapToCanvasCoords(reflected);
   }
