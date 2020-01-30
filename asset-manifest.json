@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mindFuelProject/static/css/main.fea2338d.chunk.css",
-    "main.js": "/mindFuelProject/static/js/main.d15ece5d.chunk.js",
-    "main.js.map": "/mindFuelProject/static/js/main.d15ece5d.chunk.js.map",
+    "main.js": "/mindFuelProject/static/js/main.8486c215.chunk.js",
+    "main.js.map": "/mindFuelProject/static/js/main.8486c215.chunk.js.map",
     "runtime-main.js": "/mindFuelProject/static/js/runtime-main.33d9676d.js",
     "runtime-main.js.map": "/mindFuelProject/static/js/runtime-main.33d9676d.js.map",
     "static/css/2.299a5230.chunk.css": "/mindFuelProject/static/css/2.299a5230.chunk.css",
     "static/js/2.65e8dd11.chunk.js": "/mindFuelProject/static/js/2.65e8dd11.chunk.js",
     "static/js/2.65e8dd11.chunk.js.map": "/mindFuelProject/static/js/2.65e8dd11.chunk.js.map",
     "index.html": "/mindFuelProject/index.html",
-    "precache-manifest.f2c24417fe88bb49dd6299cdc57b766b.js": "/mindFuelProject/precache-manifest.f2c24417fe88bb49dd6299cdc57b766b.js",
+    "precache-manifest.3c1272abdeed1c914c76c533c3ad03bd.js": "/mindFuelProject/precache-manifest.3c1272abdeed1c914c76c533c3ad03bd.js",
     "service-worker.js": "/mindFuelProject/service-worker.js",
     "static/css/2.299a5230.chunk.css.map": "/mindFuelProject/static/css/2.299a5230.chunk.css.map",
     "static/css/main.fea2338d.chunk.css.map": "/mindFuelProject/static/css/main.fea2338d.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.299a5230.chunk.css",
     "static/js/2.65e8dd11.chunk.js",
     "static/css/main.fea2338d.chunk.css",
-    "static/js/main.d15ece5d.chunk.js"
+    "static/js/main.8486c215.chunk.js"
   ]
 }
