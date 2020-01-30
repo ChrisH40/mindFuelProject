@@ -45,11 +45,11 @@ test('test reorgCoords', () => {
 
 test('test rotate', () => {
     let testRotation = moveFunctions.rotate({x1: 800, y1: 640, x2: 800, y2: 760, x3: 640, y3: 760}, 0, 0, 90)
-    expect(testRotation["x3"]).toEqual(760);
-    expect(testRotation["y2"]).toEqual(40);
+    expect(testRotation["x3"]).toEqual(780);
+    expect(testRotation["y2"]).toEqual(20);
     let testRotation2 = moveFunctions.rotate({x1: 800, y1: 640, x2: 800, y2: 760, x3: 640, y3: 760}, 0, 0, -90)
-    expect(testRotation2["x3"]).toEqual(80);
-    expect(testRotation2["y2"]).toEqual(800);
+    expect(testRotation2["x3"]).toEqual(100);
+    expect(testRotation2["y2"]).toEqual(780);
 });
 
 test('test translate', () => {
@@ -58,7 +58,7 @@ test('test translate', () => {
 });
 
 test('test reflect', () => {
-    expect(moveFunctions.reflect({x1: 800, y1: 640, x2: 800, y2: 760, x3: 640, y3: 760}, 0, 1, 0)).toEqual({"x1": 800, "x2": 800, "x3": 640, "y1": 200, "y2": 80, "y3": 80});
-    expect(moveFunctions.reflect({x1: 800, y1: 640, x2: 800, y2: 760, x3: 640, y3: 760}, 1, 0, 0)).toEqual({"x1": 40, "x2": 40, "x3": 200, "y1": 640, "y2": 760, "y3": 760});
-    expect(moveFunctions.reflect({x1: 800, y1: 640, x2: 800, y2: 760, x3: 640, y3: 760}, 1, 0, 1)).toEqual({"x1": -40, "x2": -40, "x3": 120, "y1": 640, "y2": 760, "y3": 760});
+    expect(moveFunctions.reflect({x1: 800, y1: 640, x2: 800, y2: 760, x3: 640, y3: 760}, 0, 1, 0)).toEqual({"x1": 820, "x2": 820, "x3": 660, "y1": 180, "y2": 60, "y3": 60});
+    expect(moveFunctions.reflect({x1: 800, y1: 640, x2: 800, y2: 760, x3: 640, y3: 760}, 1, 0, 0)).toEqual({"x1": 60, "x2": 60, "x3": 220, "y1": 620, "y2": 740, "y3": 740});
+    expect(moveFunctions.reflect({x1: 800, y1: 640, x2: 800, y2: 760, x3: 640, y3: 760}, 1, 0, 1)).toEqual({"x1": -20, "x2": -20, "x3": 140, "y1": 620, "y2": 740, "y3": 740});
 });
