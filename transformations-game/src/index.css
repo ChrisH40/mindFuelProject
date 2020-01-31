@@ -58,8 +58,6 @@ code {
   flex-wrap: wrap;
   align-content: flex-start;
   overflow: auto;
-  
-
 }
 
 .move-header {
@@ -87,6 +85,10 @@ code {
   transform: translateY(4px);
   opacity: 50%;
   cursor: grabbing;
+}
+
+.drop-area {
+  background-color: rgba(255, 192, 203, 0.555)
 }
 
 .translate {

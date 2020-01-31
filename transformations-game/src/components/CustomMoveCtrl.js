@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "tachyons";
 
 const CustomMoveCtrl = props => {
   const [translate, reflect, rotate] = props.movement;
+  let [grabbed, setGrabbed] = useState(false);
 
   //-----------------------block code starts--------------------------------------------------
   let onDragOver = ev => {
     ev.preventDefault();
     ev.target.style.cursor = "grabbing";
+    if (grabbed === false) {
+      setGrabbed(true)
+    } else return;
   };
 
   let onDragStart = (ev, name) => {
@@ -30,6 +34,7 @@ const CustomMoveCtrl = props => {
           rotate(props.triangleCoords, move.ixro, move.iyro, move.rotateFactor);
         }
       }
+      setGrabbed(false);
     });
     let updatedMoves = [...props.moves]; //copy old array data
 
@@ -83,7 +88,7 @@ const CustomMoveCtrl = props => {
       <div className="bottom-container">
         <span className="move-header">Drop Here:</span>
         <div
-          className="droppable"
+          className={"droppable " + (grabbed === true ? "drop-area" : null)}
           onDragOver={e => onDragOver(e)}
           onDrop={e => onDrop(e, "staged")}
         >
