@@ -3,7 +3,8 @@
   "homepage": "https://jmoore-code.github.io/mindFuelProject",
   "jest": {
     "collectCoverageFrom": [
-      "src/components/moveUtil.js"
+      "src/*.js",
+      "src/components/*.js"
     ]
   },
   "version": "0.1.0",
@@ -24,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "moveutilcovtest": "react-scripts test src/components/ --coverage"
+    "covtest": "react-scripts test src/ --coverage"
   },
   "eslintConfig": {
     "extends": "react-app"
