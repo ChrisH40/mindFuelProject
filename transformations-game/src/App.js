@@ -10,7 +10,7 @@ const App = () => {
   const triangle = initTriangleShape(x1, y1);
   const target = mapToCanvasCoords({ x1: 10, y1: -6, x2: 10, y2: -9, x3: 6, y3: -9 });
   let [current, setCurrent] = useState(triangle);
-  let [moving, setMoving ] = useState(false);
+  let [moving, setMoving] = useState(false);
   let [coords, setCoords] = useState(triangle);
   let [moves, setMoves] = useState([
     { name: "Translate X-Axis 5, Y-Axis -3", category: "preStage", moveType: "translate", ixt: 5, iyt: -3, style: "translate" },
@@ -54,28 +54,27 @@ const App = () => {
     setMoving(true);
     if (current.x1 !== destination.x1 || current.x2 !== destination.x2 || current.x3 !== destination.x3) {
       setCurrent(current);
-      setCurrent(current.x1 = (current.x1 < destination.x1 ? current.x1 + 10 : current.x1 - 10));
-      setCurrent(current);
-      setCurrent(current.x2 = (current.x2 < destination.x2 ? current.x2 + 10 : current.x2 - 10));
-      setCurrent(current);
-      setCurrent(current.x3 = (current.x3 < destination.x3 ? current.x3 + 10 : current.x3 - 10));
+      setCurrent(
+        current.x1 = (current.x1 < destination.x1 ? current.x1 + 10 : current.x1 - 10),
+        current.x2 = (current.x2 < destination.x2 ? current.x2 + 10 : current.x2 - 10),
+        current.x3 = (current.x3 < destination.x3 ? current.x3 + 10 : current.x3 - 10)
+      );
       setCurrent(current);
       setTimeout(() => { handleTranslateAnimate(current, destination) }, 1);
     }
     else if (current.y1 !== destination.y1 || current.y2 !== destination.y2 || current.y3 !== destination.y3) {
       setCurrent(current);
-      setCurrent(current.y1 = (current.y1 < destination.y1 ? current.y1 + 10 : current.y1 - 10));
-      setCurrent(current);
-      setCurrent(current.y2 = (current.y2 < destination.y2 ? current.y2 + 10 : current.y2 - 10));
-      setCurrent(current);
-      setCurrent(current.y3 = (current.y3 < destination.y3 ? current.y3 + 10 : current.y3 - 10));
+      setCurrent(
+        current.y1 = (current.y1 < destination.y1 ? current.y1 + 10 : current.y1 - 10),
+        current.y2 = (current.y2 < destination.y2 ? current.y2 + 10 : current.y2 - 10),
+        current.y3 = (current.y3 < destination.y3 ? current.y3 + 10 : current.y3 - 10));
       setCurrent(current);
       setTimeout(() => { handleTranslateAnimate(current, destination) }, 1);
     }
     else {
       setCurrent(current = destination);
       setMoving(false);
-      winLoseCheck(current, target);  
+      winLoseCheck(current, target);
       return;
     }
   };
@@ -85,14 +84,14 @@ const App = () => {
     if (current.x1 !== destination.x1 || current.x2 !== destination.x2 || current.x3 !== destination.x3) {
       let rotateDest = m.rotate(current, 0, 0, (deg > 0 ? 90 : -90));
       setCurrent(current);
-      setCurrent(current.x1 = rotateDest.x1);
-      setCurrent(current.y1 = rotateDest.y1);
-      setCurrent(current);
-      setCurrent(current.x2 = rotateDest.x2);
-      setCurrent(current.y2 = rotateDest.y2);
-      setCurrent(current);
-      setCurrent(current.x3 = rotateDest.x3);
-      setCurrent(current.y3 = rotateDest.y3);
+      setCurrent(
+        current.x1 = rotateDest.x1,
+        current.y1 = rotateDest.y1,
+        current.x2 = rotateDest.x2,
+        current.y2 = rotateDest.y2,
+        current.x3 = rotateDest.x3,
+        current.y3 = rotateDest.y3
+      );
       setCurrent(current);
       setTimeout(() => { handleRotateAnimate(current, destination, deg) }, 750);
     }
@@ -104,23 +103,16 @@ const App = () => {
     }
   };
 
-  // const handleReflectAnimate = (current, destination) => {
-  //   if (current.x1 !== destination.x1) {
-  //     setCurrent(current);
-  //   }
-  //   else if (current.y1 !== destination.y1) {
-  //     setCurrent(current);
-  //   }
-  //   winLoseCheck(current, target);
-  //   setTimeout(() => { handleReflectAnimate(current, destination) }, 1);
-  // };
-
   const winLoseCheck = (current, exit) => {
     if (JSON.stringify(current) === JSON.stringify(exit)) {
       setWin(true);
     }
     else {
-      if (lose === 0 && (current.x1 > 820 || current.x2 > 820 || current.x3 > 820 || current.x1 < 20 || current.x2 < 20 || current.x3 < 20 || current.y1 > 820 || current.y2 > 820 || current.y3 > 820 || current.y1 < 20 || current.y2 < 20 || current.y3 < 20)) {
+      if (lose === 0 && (
+        current.x1 > 820 || current.x2 > 820 || current.x3 > 820 ||
+        current.x1 < 20 || current.x2 < 20 || current.x3 < 20 ||
+        current.y1 > 820 || current.y2 > 820 || current.y3 > 820 ||
+        current.y1 < 20 || current.y2 < 20 || current.y3 < 20)) {
         setLose(2);
       }
       let movesLeft = moves.find(move => move.category === "preStage");
