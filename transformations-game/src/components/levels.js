@@ -1,12 +1,10 @@
 
-const levels = {
+const levels = [
 
-    levelOne: {
-
+    {
+        level: 1,
         start: [20, 20],
-
         target: { x1: 10, y1: -6, x2: 10, y2: -9, x3: 6, y3: -9 },
-
         moves: [
             { id: 1, name: "(5, -3)", category: "preStage", moveType: "translate", ixt: 5, iyt: -3, style: "translate" },
             { id: 2, name: "", category: "preStage", moveType: "reflect", reflectX: 1, reflectY: 0, cre: 0, style: "reflect-y" },
@@ -18,8 +16,9 @@ const levels = {
             { id: 8, name: "(-5, 3)", category: "preStage", moveType: "translate", ixt: -5, iyt: 3, style: "translate" },
             { id: 9, name: "270°", category: "preStage", moveType: "rotate", ixro: 0, iyro: 0, rotateFactor: -270, style: "rotate-clock" },
         ],
-    }
-}
+        obstacles: []
+    },
+]
 
 export default levels
 

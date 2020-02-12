@@ -1,5 +1,31 @@
 # Dev Notes
 
+### 2020-02-12
+
+<img src="./transformations-game/screenshots/2020-02-12.PNG" 
+alt="status20200129" width='50%' height="auto" />
+
+### Features
+
+- Movement Icons
+- Ongoing Visual Improvements
+- Level Object Packages
+
+
+### To implement next
+
+- Front end:
+  - Collision Detection
+  - Visual Improvements
+  - Transition b/t Levels
+  - Starting Page
+  - Background Effects
+  - Score/Timer
+  - Pre-Stage Moves --> Moves Submit Button to Activate Moves
+
+- Back end
+  - User sign in
+
 ### 2020-01-29
 
 <img src="./transformations-game/screenshots/2020-01-29.PNG" 

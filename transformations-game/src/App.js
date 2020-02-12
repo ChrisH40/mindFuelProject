@@ -7,12 +7,25 @@ import levels from "./components/levels.js";
 
 const App = () => {
 
-  const triangle = initTriangleShape(levels.levelOne.start[0], levels.levelOne.start[1]);
-  const target = mapToCanvasCoords(levels.levelOne.target);
+  const levelSelect = (levels) => {
+    // starting level will be determined by player data on server
+    let level = 1
+    for (let i = 0; i <= levels.length; i++) {
+      if (levels[i].level === level) {
+        return levels[i]
+      }
+      else return
+    }
+  };
+
+  const level = levelSelect(levels)
+
+  const triangle = initTriangleShape(level.start[0], level.start[1]);
+  const target = mapToCanvasCoords(level.target);
   let [current, setCurrent] = useState(triangle);
   let [moving, setMoving] = useState(false);
   let [coords, setCoords] = useState(triangle)
-  let [moves, setMoves] = useState(levels.levelOne.moves);
+  let [moves, setMoves] = useState(level.moves);
   let [win, setWin] = useState(false)
   let [lose, setLose] = useState(0);
 
