@@ -53,7 +53,8 @@ code {
 .preStage,
 .droppable {
   height: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -91,17 +92,37 @@ code {
   background-color: rgba(255, 192, 203, 0.555)
 }
 
+.translate,
+.rotate-clock,
+.rotate-counter,
+.reflect-x,
+.reflect-y {
+  background-color:#d3dce7;
+}
+
+.move-text {
+  font-weight: bold;
+  font-size: 25px;
+}
+
 .translate {
-  background-color:#b6cbe6;
+  background-image: url("./images/translate.svg");
 }
 
-.rotate {
-  background-color:  #e7edf7;
-;
+.rotate-clock {
+  background-image: url("./images/rotation-clock.svg");
 }
 
-.reflect {
-  background-color: #6699cc;
+.rotate-counter {
+  background-image: url("./images/rotation-counter.svg");
+}
+
+.reflect-x {
+  background-image: url("./images/reflect-x.svg");
+}
+
+.reflect-y {
+  background-image: url("./images/reflect-y.svg");
 }
 
 .popup {  
@@ -141,25 +162,3 @@ code {
   transform: translateY(4px);
   cursor: pointer;
 }
-
-/* Used for old CSS Menus */
-
-/* .translate-container,
-.rotate-container,
-.reflect-container {
-  width: 100%;
-  height: 13vh;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding: 5px;
-  text-align: center;
-}
-
-.menu-item {
-  margin: 5px 10px 5px 10px;
-}
-
-.menu-header {
-  font-size: 100%;
-  font-weight: bold;
-} */
