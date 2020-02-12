@@ -3,29 +3,18 @@ import { SIZE, GRID_MARGIN, initTriangleShape } from "./components/settings";
 import Canvas from "./components/Canvas";
 import CustomMoveCtrl from "./components/CustomMoveCtrl";
 import m, { mapToCanvasCoords } from "./components/moveUtil";
+import levels from "./components/levels.js";
 
 const App = () => {
-  // --- This becomes part of Level Object/State/Array Package ---
-  const [x1, y1] = [GRID_MARGIN, GRID_MARGIN];
-  const triangle = initTriangleShape(x1, y1);
-  const target = mapToCanvasCoords({ x1: 10, y1: -6, x2: 10, y2: -9, x3: 6, y3: -9 });
+
+  const triangle = initTriangleShape(levels.levelOne.start[0], levels.levelOne.start[1]);
+  const target = mapToCanvasCoords(levels.levelOne.target);
   let [current, setCurrent] = useState(triangle);
   let [moving, setMoving] = useState(false);
-  let [coords, setCoords] = useState(triangle);
-  let [moves, setMoves] = useState([
-    { name: "Translate X-Axis 5, Y-Axis -3", category: "preStage", moveType: "translate", ixt: 5, iyt: -3, style: "translate" },
-    { name: "Reflect Y Axis ", category: "preStage", moveType: "reflect", reflectX: 1, reflectY: 0, cre: 0, style: "reflect" },
-    { name: "Translate X-Axis 0, Y-Axis -7", category: "preStage", moveType: "translate", ixt: 0, iyt: -7, style: "translate" },
-    { name: "Rotate 180° Origin (0, 0) Counter-Clockwise", category: "preStage", moveType: "rotate", ixro: 0, iyro: 0, rotateFactor: 180, style: "rotate" },
-    { name: "Reflect X Axis", category: "preStage", moveType: "reflect", reflectX: 0, reflectY: 1, cre: 0, style: "reflect" },
-    { name: "Rotate 90° Origin (0, 0) Clockwise", category: "preStage", moveType: "rotate", ixro: 0, iyro: 0, rotateFactor: -90, style: "rotate" },
-    { name: "Translate X-Axis 0, Y-Axis -9", category: "preStage", moveType: "translate", ixt: 0, iyt: -9, style: "translate" },
-    { name: "Translate X-Axis -5, Y-Axis 3", category: "preStage", moveType: "translate", ixt: -5, iyt: 3, style: "translate" },
-    { name: "Rotate 270° Origin (0, 0) Clockwise", category: "preStage", moveType: "rotate", ixro: 0, iyro: 0, rotateFactor: -270, style: "rotate" },
-  ]);
+  let [coords, setCoords] = useState(triangle)
+  let [moves, setMoves] = useState(levels.levelOne.moves);
   let [win, setWin] = useState(false)
   let [lose, setLose] = useState(0);
-  // --- ---
 
   const handleRestart = () => {
     window.location.reload(true);
