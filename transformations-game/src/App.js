@@ -1,21 +1,24 @@
 import React, { useState } from "react";
-import { SIZE, GRID_MARGIN, initTriangleShape } from "./components/settings";
-import Canvas from "./components/Canvas";
-import CustomMoveCtrl from "./components/CustomMoveCtrl";
-import m, { mapToCanvasCoords } from "./components/moveUtil";
+import { SIZE, GRID_MARGIN, initTriangleShape } from "./components/settings.js";
+import CustomMoveCtrl from "./components/CustomMoveCtrl.js";
+import m, { mapToCanvasCoords } from "./components/moveUtil.js";
 import levels from "./components/levels.js";
+import { Grid, Exit } from "./components/Grid.js";
+import { Player } from "./components/Player.js";
+import { Stage } from '@inlet/react-pixi';
+import "tachyons";
 
 const App = () => {
+// starting level will be determined by player data on server
+  let lvl = 1;
 
-  const levelSelect = (levels) => {
-    // starting level will be determined by player data on server
-    let level = 1
+  const levelSelect = (levels) => { 
     for (let i = 0; i <= levels.length; i++) {
-      if (levels[i].level === level) {
+      if (levels[i].level === lvl) {
         return levels[i]
       }
-      else return
     }
+    return levels[0]
   };
 
   const level = levelSelect(levels)
@@ -23,9 +26,17 @@ const App = () => {
   const triangle = initTriangleShape(level.start[0], level.start[1]);
   const target = mapToCanvasCoords(level.target);
   let [current, setCurrent] = useState(triangle);
-  let [moving, setMoving] = useState(false);
-  let [coords, setCoords] = useState(triangle)
+  let [destination, setDestination] = useState(triangle);
+  const [moving, setMoving] = useState(false);
+  const [moveX, setMoveX] = useState(false);
+  const [moveY, setMoveY] = useState(false);
+  const [rotation, setRotation] = useState(0);
+  const [rotationFocal, setRotationFocal] = useState({"x": 420, "y": 420});
+  const [reflectionX, setReflectionX] = useState(false);
+  const [reflectionY, setReflectionY] = useState(false);
+
   let [moves, setMoves] = useState(level.moves);
+
   let [win, setWin] = useState(false)
   let [lose, setLose] = useState(0);
 
@@ -35,74 +46,26 @@ const App = () => {
 
   const translate = (current, xUnit, yUnit) => {
     let transformedCoords = m.translate(current, xUnit, yUnit);
-    setCoords(coords = transformedCoords);
-    handleTranslateAnimate(current, coords);
+    setDestination(destination = transformedCoords);
+    setMoving(true);
+    setMoveX(xUnit !== 0 ? true : false);
+    setMoveY(yUnit !== 0 ? true : false);
   };
 
   const rotate = (current, xUnit, yUnit, deg) => {
     let transformedCoords = m.rotate(current, xUnit, yUnit, deg);
-    setCoords(coords = transformedCoords);
-    handleRotateAnimate(current, coords, deg);
+    setDestination(destination = transformedCoords);
+    setMoving(true);
+    setRotation(-deg);
+    setRotationFocal(mapToCanvasCoords({ "x": xUnit, "y": yUnit }));
   };
 
   const reflect = (current, a, b, c) => {
     let transformedCoords = m.reflect(current, a, b, c);
-    setCurrent(current = transformedCoords);
-    setCoords(coords = transformedCoords);
-    winLoseCheck(current, target);
-  };
-
-  const handleTranslateAnimate = (current, destination) => {
+    setDestination(destination = transformedCoords);
     setMoving(true);
-    if (current.x1 !== destination.x1 || current.x2 !== destination.x2 || current.x3 !== destination.x3) {
-      setCurrent(current);
-      setCurrent(
-        current.x1 = (current.x1 < destination.x1 ? current.x1 + 10 : current.x1 - 10),
-        current.x2 = (current.x2 < destination.x2 ? current.x2 + 10 : current.x2 - 10),
-        current.x3 = (current.x3 < destination.x3 ? current.x3 + 10 : current.x3 - 10)
-      );
-      setCurrent(current);
-      setTimeout(() => { handleTranslateAnimate(current, destination) }, 1);
-    }
-    else if (current.y1 !== destination.y1 || current.y2 !== destination.y2 || current.y3 !== destination.y3) {
-      setCurrent(current);
-      setCurrent(
-        current.y1 = (current.y1 < destination.y1 ? current.y1 + 10 : current.y1 - 10),
-        current.y2 = (current.y2 < destination.y2 ? current.y2 + 10 : current.y2 - 10),
-        current.y3 = (current.y3 < destination.y3 ? current.y3 + 10 : current.y3 - 10));
-      setCurrent(current);
-      setTimeout(() => { handleTranslateAnimate(current, destination) }, 1);
-    }
-    else {
-      setCurrent(current = destination);
-      setMoving(false);
-      winLoseCheck(current, target);
-      return;
-    }
-  };
-
-  const handleRotateAnimate = (current, destination, deg) => {
-    setMoving(true);
-    if (current.x1 !== destination.x1 || current.x2 !== destination.x2 || current.x3 !== destination.x3) {
-      let rotateDest = m.rotate(current, 0, 0, (deg > 0 ? 90 : -90));
-      setCurrent(current);
-      setCurrent(
-        current.x1 = rotateDest.x1,
-        current.y1 = rotateDest.y1,
-        current.x2 = rotateDest.x2,
-        current.y2 = rotateDest.y2,
-        current.x3 = rotateDest.x3,
-        current.y3 = rotateDest.y3
-      );
-      setCurrent(current);
-      setTimeout(() => { handleRotateAnimate(current, destination, deg) }, 750);
-    }
-    else {
-      setCurrent(current = destination);
-      setMoving(false);
-      winLoseCheck(current, target);
-      return;
-    }
+    setReflectionX(a === 1 ? true : false);
+    setReflectionY(b === 1 ? true : false);
   };
 
   const winLoseCheck = (current, exit) => {
@@ -112,9 +75,9 @@ const App = () => {
     else {
       if (lose === 0 && (
         current.x1 > 820 || current.x2 > 820 || current.x3 > 820 ||
-        current.x1 < 20 || current.x2 < 20 || current.x3 < 20 ||
+        current.x1 < 0 || current.x2 < 0 || current.x3 < 0 ||
         current.y1 > 820 || current.y2 > 820 || current.y3 > 820 ||
-        current.y1 < 20 || current.y2 < 20 || current.y3 < 20)) {
+        current.y1 < 0 || current.y2 < 0 || current.y3 < 0)) {
         setLose(2);
       }
       let movesLeft = moves.find(move => move.category === "preStage");
@@ -130,7 +93,7 @@ const App = () => {
       <div className='popup_inner'>
         <h1
           className={win === true ? "win-font" : "lose-font"}>
-          {win === true ? "You Win!" : (lose === 1 ? "You Ran Out Of Moves :(" : "Out Of Bounds!")}
+          {win === true ? "You Wrangled Yerself A 'Right Triangle'!" : (lose === 1 ? "Yer Outta Moves Partner!" : "Yer Outta Bounds!")}
         </h1>
         <button className="restart-button" onClick={() => handleRestart()}>Play Again?</button>
       </div>
@@ -149,21 +112,39 @@ const App = () => {
             transform: "translate(-50%, -50%)"
           }}
         >
-          <Canvas
-            width={SIZE + GRID_MARGIN * 2}
-            triangle={triangle}
-            target={target}
-            current={current}
-            setCurrent={setCurrent}
-            destination={coords}
-            win={win}
-            lose={lose}
-          />
+          <Stage width={SIZE + GRID_MARGIN * 2} height={SIZE + GRID_MARGIN * 2} options={{ transparent: true, antialias: true }}>
+            <Grid x={20} y={20} width={800} height={800} target={target} />
+            <Exit
+              target={target} />
+            < Player
+              start={triangle}
+              current={current}
+              setCurrent={setCurrent}
+              destination={destination}
+              moving={moving}
+              setMoving={setMoving}
+              moveX={moveX}
+              setMoveX={setMoveX}
+              moveY={moveY}
+              setMoveY={setMoveY}
+              rotation={rotation}
+              setRotation={setRotation}
+              rotationFocal={rotationFocal}
+              reflectionX={reflectionX}
+              setReflectionX={setReflectionX}
+              reflectionY={reflectionY}
+              setReflectionY={setReflectionY}
+              target={target}
+              win={win}
+              lose={lose}
+              winLoseCheck={winLoseCheck}
+            />
+          </Stage>
         </div>
       </div>
       <div className="right-container">
         <CustomMoveCtrl
-          triangleCoords={coords}
+          destination={destination}
           movement={[translate, reflect, rotate]}
           moves={moves}
           setMoves={setMoves}

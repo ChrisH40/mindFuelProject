@@ -3,8 +3,9 @@
   display: grid;
   grid-template-columns: 1.5fr 0.5fr;
   grid-template-rows: 1fr;
-  background: rgb(2,0,36);
-  background: radial-gradient(circle, rgba(2,0,36,0.6783088235294117) 0%, rgba(47,47,124,0.7763480392156863) 11%, rgba(7,148,177,1) 100%);
+  background-image: url("./images/desert_background.jpg")
+  /* background: rgb(2,0,36);
+  background: radial-gradient(circle, rgba(2,0,36,0.6783088235294117) 0%, rgba(47,47,124,0.7763480392156863) 11%, rgba(7,148,177,1) 100%); */
 }
 
 body {
@@ -44,11 +45,15 @@ code {
   flex-direction: column;
   height: 49vh;
   border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.25);
   margin: 5px;
   padding: 5px;
   position: relative;
 }
 
+.bottom-container {
+  background-color: rgba(138, 0, 0, 0.30);
+}
 
 .preStage,
 .droppable {
@@ -89,20 +94,35 @@ code {
 }
 
 .drop-area {
-  background-color: rgba(255, 192, 203, 0.555)
+  background-color:rgba(139, 41, 41, 0.35);
 }
 
-.translate,
+/* .translate,
 .rotate-clock,
 .rotate-counter,
 .reflect-x,
 .reflect-y {
   background-color:#d3dce7;
+} */
+
+.translate {
+  background-color: #e28822;
+}
+
+.rotate-clock,
+.rotate-counter {
+  background-color: #e25822;
+}
+
+.reflect-x,
+.reflect-y {
+  background-color: #df9f71;
 }
 
 .move-text {
-  font-weight: bold;
-  font-size: 25px;
+  font-weight: bolder;
+  font-size: 28px;
+  color: #201207;
 }
 
 .translate {

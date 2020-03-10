@@ -1,5 +1,31 @@
 # Dev Notes
 
+### 2020-03-10
+
+<img src="./transformations-game/screenshots/2020-03-10.PNG" 
+alt="status20200310" width='50%' height="auto" />
+
+### Features
+
+- Desert Theme
+- Implemented PIXI.js library
+- Translate, Rotate, Reflect animations
+- Set custom focal point for Rotate animation
+
+### To implement next
+
+- Front end:
+  - Collision Detection
+  - Visual Improvements
+  - Transition b/t Levels
+  - Starting Page
+  - Score
+  - Pre-Stage Moves --> Moves Submit Button to Activate Moves
+
+- Back end
+  - User sign in
+  - Data Recording
+
 ### 2020-02-12
 
 <img src="./transformations-game/screenshots/2020-02-12.PNG" 

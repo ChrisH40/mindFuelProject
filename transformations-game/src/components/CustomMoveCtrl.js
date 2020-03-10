@@ -24,13 +24,13 @@ const CustomMoveCtrl = props => {
       if (move.id === moveKey) {
         move.category = category;
         if (move.category === "staged" && move.moveType === "reflect") {
-          reflect(props.triangleCoords, move.reflectX, move.reflectY, move.cre);
+          reflect(props.destination, move.reflectX, move.reflectY, move.cre);
         }
         if (move.category === "staged" && move.moveType === "translate") {
-          translate(props.triangleCoords, move.ixt, move.iyt);
+          translate(props.destination, move.ixt, move.iyt);
         }
         if (move.category === "staged" && move.moveType === "rotate") {
-          rotate(props.triangleCoords, move.ixro, move.iyro, move.rotateFactor);
+          rotate(props.destination, move.ixro, move.iyro, move.rotateFactor);
         }
       }
       setGrabbed(false);
