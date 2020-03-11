@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AppContext } from './components/app-context.js';
 import { SIZE, GRID_MARGIN, initTriangleShape } from "./components/settings.js";
 import CustomMoveCtrl from "./components/CustomMoveCtrl.js";
 import m, { mapToCanvasCoords } from "./components/moveUtil.js";
@@ -9,29 +10,19 @@ import { Stage } from '@inlet/react-pixi';
 import "tachyons";
 
 const App = () => {
-// starting level will be determined by player data on server
-  let lvl = 1;
+  const context = React.useContext(AppContext);
 
-  const levelSelect = (levels) => { 
-    for (let i = 0; i <= levels.length; i++) {
-      if (levels[i].level === lvl) {
-        return levels[i]
-      }
-    }
-    return levels[0]
-  };
+  const level = levels[context.currentLevel];
 
-  const level = levelSelect(levels)
-
-  const triangle = initTriangleShape(level.start[0], level.start[1]);
-  const target = mapToCanvasCoords(level.target);
+  let triangle = initTriangleShape(level.start[0], level.start[1]);
+  let target = mapToCanvasCoords(level.target);
   let [current, setCurrent] = useState(triangle);
   let [destination, setDestination] = useState(triangle);
   const [moving, setMoving] = useState(false);
   const [moveX, setMoveX] = useState(false);
   const [moveY, setMoveY] = useState(false);
   const [rotation, setRotation] = useState(0);
-  const [rotationFocal, setRotationFocal] = useState({"x": 420, "y": 420});
+  const [rotationFocal, setRotationFocal] = useState({ "x": 420, "y": 420 });
   const [reflectionX, setReflectionX] = useState(false);
   const [reflectionY, setReflectionY] = useState(false);
 
@@ -40,8 +31,20 @@ const App = () => {
   let [win, setWin] = useState(false)
   let [lose, setLose] = useState(0);
 
+  // Might change with database. Can possibly store levels in there.
   const handleRestart = () => {
-    window.location.reload(true);
+    const lvlMoves = levels[context.currentLevel]['moves'];
+    for (let i = 0; i < lvlMoves.length; i++) {
+      if (lvlMoves[i]['category'] === "staged") {
+        lvlMoves[i]['category'] = "preStage";
+      }
+    }
+    return context.setInstanceKey(context.instanceKey + 1);
+  };
+
+  const handleNextLevel = () => {
+    context.setCurrentLevel(context.currentLevel + 1);
+    context.setInstanceKey(context.instanceKey + 1);
   };
 
   const translate = (current, xUnit, yUnit) => {
@@ -93,9 +96,10 @@ const App = () => {
       <div className='popup_inner'>
         <h1
           className={win === true ? "win-font" : "lose-font"}>
-          {win === true ? "You Wrangled Yerself A 'Right Triangle'!" : (lose === 1 ? "Yer Outta Moves Partner!" : "Yer Outta Bounds!")}
+          {win === true ? level.popUpMessages[0] : (lose === 1 ? level.popUpMessages[1] : level.popUpMessages[2])}
         </h1>
         <button className="restart-button" onClick={() => handleRestart()}>Play Again?</button>
+        {win === true ? <button className="next-level-button" onClick={() => handleNextLevel()}> Next Level! </button> : null}
       </div>
     </div>
   );
@@ -159,3 +163,4 @@ const App = () => {
 };
 
 export default App;
+

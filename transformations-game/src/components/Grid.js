@@ -83,8 +83,8 @@ export const Exit = (props) => {
         applyProps: (triangle, _, props) => {
             const { target, x, y, pivot, fill } = props;
             triangle.clear();
-            triangle.beginFill();
-            triangle.lineStyle(1, 0x808080);
+            triangle.beginFill(0, 0.5);
+            triangle.lineStyle(6, 0x000000);
             triangle.drawPolygon([target.x1, target.y1, target.x2, target.y2, target.x3, target.y3]);
             triangle.endFill();
             triangle.pivot.x = pivot.x;

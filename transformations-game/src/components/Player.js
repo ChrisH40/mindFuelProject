@@ -168,8 +168,8 @@ export const Player = (props) => {
         applyProps: (triangle, _, props) => {
             const { start, x, y, angle, pivot, scaleX, scaleY, lose, win, fill } = props;
             triangle.clear();
-            triangle.beginFill(0xffFF00);
-            triangle.lineStyle(5, 0xff0000, 1);
+            triangle.beginFill(0xFFD700, 1);
+            triangle.lineStyle(5, 0xDAA520, 1);
             triangle.drawPolygon([start.x1, start.y1, start.x2, start.y2, start.x3, start.y3]);
             triangle.endFill();
             triangle.pivot.x = pivot.x;
@@ -196,22 +196,3 @@ export const Player = (props) => {
         />
     );
 };
-
-// const moveCombos = [
-//     [0, 0, 1, 1, { x: (420 + props.start.x1) - props.current.x1, y: (420 + props.start.y1) - props.current.y1 }],
-//     [90, -270, 1, 1, { x: (420 + props.start.x1) - props.current.y1, y: (-420 + props.start.y1) + props.current.x1 }],
-//     [180, -180, 1, 1, { x: (-420 + props.start.x1) + props.current.x1, y: (-420 + props.start.y1) + props.current.y1 }],
-//     [270, -90, 1, 1, { x: (-420 + props.start.x1) + props.current.y1, y: (420 + props.start.y1) - props.current.x1 }],
-//     [0, 0, -1, 1, { x: (-420 + props.start.x1) + props.current.x1, y: (420 + props.start.y1) - props.current.y1 }],
-//     [90, -270, -1, 1, { x: (-420 + props.start.x1) + props.current.y1, y: (-420 + props.start.y1) + props.current.x1 }],
-//     [180, -180, -1, 1, { x: (420 + props.start.x1) - props.current.x1, y: (-420 + props.start.y1) + props.current.y1 }],
-//     [270, -90, -1, 1, { x: (420 + props.start.x1) - props.current.y1, y: (420 + props.start.y1) - props.current.x1 }],
-//     [0, 0, 1, -1, { x: (420 + props.start.x1) - props.current.x1, y: (-420 + props.start.y1) + props.current.y1 }],
-//     [90, -270, 1, -1, { x: (420 + props.start.x1) - props.current.y1, y: (420 + props.start.y1) - props.current.x1 }],
-//     [180, -180, 1, -1, { x: (-420 + props.start.x1) + props.current.x1, y: (420 + props.start.y1) - props.current.y1 }],
-//     [270, -90, 1, -1, { x: (-420 + props.start.x1) + props.current.y1, y: (-420 + props.start.y1) + props.current.x1 }],
-//     [0, 0, -1, -1, { x: (-420 + props.start.x1)+ props.current.x1, y: (-420 + props.start.y1) + props.current.y1 }],
-//     [90, -270, -1, -1, { x: (-420 + props.start.x1) + props.current.y1, y: (420 + props.start.y1) - props.current.x1 }],
-//     [180, -180, -1, -1, { x: (420 + props.start.x1) - props.current.x1, y: (420 + props.start.y1) - props.current.y1 }],
-//     [270, -90, -1, -1, { x: (420 + props.start.x1)- props.current.y1, y: (-420 + props.start.y1) + props.current.x1 }],
-// ];

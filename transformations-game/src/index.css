@@ -3,7 +3,8 @@
   display: grid;
   grid-template-columns: 1.5fr 0.5fr;
   grid-template-rows: 1fr;
-  background-image: url("./images/desert_background.jpg")
+  background-image: url("./images/desert_background.jpg");
+  background-position: top;
   /* background: rgb(2,0,36);
   background: radial-gradient(circle, rgba(2,0,36,0.6783088235294117) 0%, rgba(47,47,124,0.7763480392156863) 11%, rgba(7,148,177,1) 100%); */
 }
@@ -52,7 +53,7 @@ code {
 }
 
 .bottom-container {
-  background-color: rgba(138, 0, 0, 0.30);
+  background-color: rgba(138, 0, 0, 0.20);
 }
 
 .preStage,
@@ -173,11 +174,18 @@ code {
   color: red;
 }
 
-.restart-button:hover {
+.restart-button,
+.next-level-button {
+  margin: 5px;
+}
+
+.restart-button:hover,
+.next-level-button:hover {
   cursor: pointer;
 }
 
-.restart-button:active {
+.restart-button:active,
+.next-level-button:active {
   background-color: rgba(255, 255, 255, 0.8);
   transform: translateY(4px);
   cursor: pointer;
