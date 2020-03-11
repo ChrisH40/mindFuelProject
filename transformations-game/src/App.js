@@ -7,7 +7,11 @@ import levels from "./components/levels.js";
 import { Grid, Exit } from "./components/Grid.js";
 import { Player } from "./components/Player.js";
 import { Stage } from '@inlet/react-pixi';
+import { createStore } from "redux"
+
 import "tachyons";
+
+
 
 const App = () => {
   const context = React.useContext(AppContext);
@@ -96,7 +100,7 @@ const App = () => {
       <div className='popup_inner'>
         <h1
           className={win === true ? "win-font" : "lose-font"}>
-          {win === true ? level.popUpMessages[0] : (lose === 1 ? level.popUpMessages[1] : level.popUpMessages[2])}
+          {win === true ? "You Wrangled Yerself A 'Right Triangle'!" : (lose === 1 ? "Yer Outta Moves Partner!" : "Yer Outta Bounds!")}
         </h1>
         <button className="restart-button" onClick={() => handleRestart()}>Play Again?</button>
         {win === true ? <button className="next-level-button" onClick={() => handleNextLevel()}> Next Level! </button> : null}

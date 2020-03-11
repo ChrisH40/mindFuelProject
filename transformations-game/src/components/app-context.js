@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import App from '../App.js';
+import AppRouter from './AppRouter';
 
 export const AppContext = React.createContext();
 
@@ -16,7 +16,7 @@ export const ContextProvider = () => {
             setInstanceKey: setInstanceKey,
         }}
         >
-            <App key={instanceKey}/>
+            <AppRouter key={instanceKey}/>
         </AppContext.Provider>
     )
 };
