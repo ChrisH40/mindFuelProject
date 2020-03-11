@@ -93,7 +93,7 @@ const App = () => {
       <div className='popup_inner'>
         <h1
           className={win === true ? "win-font" : "lose-font"}>
-          {win === true ? "You Wrangled Yerself A 'Right Triangle'!" : (lose === 1 ? "Yer Outta Moves Partner!" : "Yer Outta Bounds!")}
+          {win === true ? level.popUpMessages[0] : (lose === 1 ? level.popUpMessages[1] : level.popUpMessages[2])}
         </h1>
         <button className="restart-button" onClick={() => handleRestart()}>Play Again?</button>
       </div>
