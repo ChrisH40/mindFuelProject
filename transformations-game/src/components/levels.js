@@ -1,6 +1,6 @@
+import gradient from '../images/level0gradient.jpeg';
 import desertBackground from '../images/desert_background.jpg';
 import mountainBackground from '../images/mountain_background.jpg';
-
 
 const levels = [
 
@@ -47,14 +47,13 @@ const levels = [
         obstacles: [],
         popUpMessages: ["You Win!", "You Ran Out of Moves!", "Out of Bounds!"],
         theme: {
-            levelTitle: "Yee Haw Sceles Triangles",
-            backgroundImage: desertBackground,
+            backgroundImage: gradient,
             topContainerBackground: "#ffffff44",
-            botContainerBackground: "#995e2e44",
-            menuContainerBackground: "#ffffff44",
+            botContainerBackground: "#592e9940",
+            menuContainerBackground: "",
             font: {type: "Courier", color: "#201207"},
-            moveColour: {translate: "#e28822", rotate: "#e25822", reflect: "#df9f71", text: "#201207"},
-            grid: { axis: 0xFF0000, border: 0x000000, text: 0x000000 },
+            moveColour: {translate: "#ff9361", rotate: "#c561ff", reflect: "#ffbb61", text: "#201207"},
+            grid: { axis: 0x808080, border: 0x000000, text: 0x000000 },
             playerLine: { color: 0xDAA520, weight: 5 },
             playerFill: { color: 0xFFD700, opacity: 1 },
             exitLine: { weight: 6, color: 0x000000 },
@@ -113,16 +112,15 @@ const levels = [
             { id: 14, name: "270°", category: "preStage", moveType: "rotate", ixro: 0, iyro: 0, rotateFactor: 270, style: "rotate-counter" },
         ],
         obstacles: [],
-        popUpMessages: ["You Wrangled Yerself a 'Right Triangle'!", "Yer Outta Moves, Partner!", "That There's Outta Bounds!"],
+        popUpMessages: ["You Reached the Summit!", "Your Move Supplies Have Run Out!", "You Fell Off the Grid!"],
         theme: {
-            levelTitle: "Yee Haw Sceles Triangles",
-            backgroundImage: desertBackground,
+            backgroundImage: mountainBackground,
             topContainerBackground: "#ffffff44",
             botContainerBackground: "#995e2e44",
             menuContainerBackground: "#ffffff44",
             font: {type: "Courier", color: "#201207"},
-            moveColour: {translate: "#e28822", rotate: "#e25822", reflect: "#df9f71", text: "#201207"},
-            grid: { axis: 0xFF0000, border: 0x000000, text: 0x000000 },
+            moveColour: {translate: "#006be5", rotate: "#038c8c", reflect: "#69828c", text: "#201207"},
+            grid: { axis: 0xC0C0C0, border: 0x000000, text: 0xFFFFFF },
             playerLine: { color: 0xDAA520, weight: 5 },
             playerFill: { color: 0xFFD700, opacity: 1 },
             exitLine: { weight: 6, color: 0x000000 },

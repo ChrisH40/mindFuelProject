@@ -1,0 +1,4 @@
+Level 0: ReflectX, (0,-9), (0,-7)
+Level 1: ReflectX, (0,-9), (1,-5)
+Level 2: 90degClockwise, (0,-1), 180deg, ReflectX
+Level 3: ReflectY, (3,4), 180deg, (2,-8), (3,-2)
