@@ -1,5 +1,33 @@
 # Dev Notes
 
+### 2020-03-12
+
+<img src="./transformations-game/screenshots/2020-03-12.PNG" 
+alt="status20200312" width='50%' height="auto" />
+
+### Features
+
+- Firebase, React Router added
+- Mountain Theme/Customizable Level Themes
+- Level Improvements, Visual Improvements
+- Level Transitions, Level Restart Button
+- Top Score Bar - Level Name, Username, Level, Score, Attempts
+- Basic Score Tracking
+- Basic Login Page
+
+### To implement next
+
+- Front end:
+  - Obstacles/Collision Detection
+  - Customizable Move Choices on Drag & Drop
+  - Visual Improvements
+  - Starting Page Improvements
+  - Pre-Stage Moves --> Moves Submit Button to Activate Moves
+
+- Back end
+  - User sign in
+  - Data Recording
+
 ### 2020-03-10
 
 <img src="./transformations-game/screenshots/2020-03-10.PNG" 

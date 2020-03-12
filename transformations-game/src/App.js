@@ -42,10 +42,12 @@ const App = () => {
       }
     }
     context.setCurrentAttempts(context.currentAttempts + 1);
+    context.setCurrentScore(20000);
     return context.setInstanceKey(context.instanceKey + 1);
   };
 
   const handleNextLevel = () => {
+    context.setCurrentScore(20000);
     context.setCurrentLevel(context.currentLevel + 1);
     context.setInstanceKey(context.instanceKey + 1);
   };

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { AppContext } from '../components/app-context.js';
 import "tachyons";
 
 const CustomMoveCtrl = props => {
+  const context = React.useContext(AppContext); 
+
   const [translate, reflect, rotate] = props.movement;
   let [grabbed, setGrabbed] = useState(false);
 
@@ -24,12 +27,15 @@ const CustomMoveCtrl = props => {
         move.category = category;
         if (move.category === "staged" && move.moveType === "reflect") {
           reflect(props.destination, move.reflectX, move.reflectY, move.cre);
+          context.setCurrentScore(context.currentScore - 1000);
         }
         if (move.category === "staged" && move.moveType === "translate") {
           translate(props.destination, move.ixt, move.iyt);
+          context.setCurrentScore(context.currentScore - 1000);
         }
         if (move.category === "staged" && move.moveType === "rotate") {
           rotate(props.destination, move.ixro, move.iyro, move.rotateFactor);
+          context.setCurrentScore(context.currentScore - 1000);
         }
       }
       setGrabbed(false);
@@ -59,8 +65,8 @@ const CustomMoveCtrl = props => {
   return (
     <div>
       <div className="top-container" style={{ backgroundColor: props.topBackground }}>
-        <h2 className="tc f3 pa0" style={{ fontFamily: props.font.type }}>Please Select A Move</h2>
-        <span className="move-header" style={{ fontFamily: props.font.type }}>Moves:</span>
+        <h2 className="tc f3 pa0" style={{ fontFamily: props.font.type, color: props.font.color }}>Please Select A Move</h2>
+        <span className="move-header" style={{ fontFamily: props.font.type, color: props.font.color }}>Moves:</span>
         <div
           className="preStage"
           onDragOver={e => onDragOver(e)}
@@ -75,7 +81,7 @@ const CustomMoveCtrl = props => {
         <button className="reset-button" onClick={() => props.handleRestart()}>Reset Level</button>
       </div>
       <div className="bottom-container" style={{ backgroundColor: props.botBackground }}>
-        <span className="move-header" style={{ fontFamily: props.font.type }}>Drop Here:</span>
+        <span className="move-header" style={{ fontFamily: props.font.type, color: props.font.color }}>Drop Here:</span>
         <div
           className={"droppable " + (grabbed === true ? "drop-area" : null)}
           onDragOver={e => onDragOver(e)}
