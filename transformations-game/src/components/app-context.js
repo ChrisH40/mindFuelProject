@@ -6,7 +6,12 @@ export const AppContext = React.createContext();
 export const ContextProvider = () => {
     const [instanceKey, setInstanceKey] = useState(0);
     const [currentLevel, setCurrentLevel] = useState(0);
- 
+    const [currentAttempts, setCurrentAttempts] = useState(0);
+    const [currentScore, setCurrentScore] = useState(0);
+
+
+
+
     return (
         <AppContext.Provider
         value={{
@@ -14,6 +19,10 @@ export const ContextProvider = () => {
             setCurrentLevel: setCurrentLevel,
             instanceKey: instanceKey,
             setInstanceKey: setInstanceKey,
+            currentAttempts: currentAttempts,
+            setCurrentAttempts: setCurrentAttempts,
+            currentScore: currentScore,
+            setCurrentScore: setCurrentScore,
         }}
         >
             <AppRouter key={instanceKey}/>

@@ -2,10 +2,8 @@
 .App {
   display: grid;
   grid-template-columns: 1.5fr 0.5fr;
-  grid-template-rows: 1fr;
-  background-position: center;
-  /* background: rgb(2,0,36);
-  background: radial-gradient(circle, rgba(2,0,36,0.6783088235294117) 0%, rgba(47,47,124,0.7763480392156863) 11%, rgba(7,148,177,1) 100%); */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 body {
@@ -23,19 +21,32 @@ code {
     monospace;
 }
 
+.top-menu {
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
+  height: 5vh;
+  width: 100%;
+  border: 1px solid black;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .Canvas {
   display: flex;
   flex-direction: column;
-  width: 100vh;
+  width: 100%;
   height: 100vh;
-  padding: 10px;
-  
+  padding: 10px; 
 }
 
 .right-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   height: 100vh;
 }
 
@@ -43,11 +54,15 @@ code {
 .bottom-container {
   display: flex;
   flex-direction: column;
-  height: 49vh;
+  height: 46vh;
   border: 1px solid black;
   margin: 5px;
   padding: 5px;
   position: relative;
+}
+
+.middle-container {
+  text-align: center;
 }
 
 .preStage,
@@ -146,17 +161,23 @@ code {
 }
 
 .restart-button,
+.reset-button,
 .next-level-button {
   margin: 5px;
+  color: black;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .restart-button:hover,
-.next-level-button:hover {
+.next-level-button:hover,
+.reset-button {
   cursor: pointer;
 }
 
 .restart-button:active,
-.next-level-button:active {
+.next-level-button:active,
+.reset-button {
   background-color: rgba(255, 255, 255, 0.8);
   transform: translateY(4px);
   cursor: pointer;

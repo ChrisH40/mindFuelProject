@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AppContext } from './components/app-context.js';
 import { SIZE, GRID_MARGIN, initTriangleShape } from "./components/settings.js";
 import CustomMoveCtrl from "./components/CustomMoveCtrl.js";
+import TopMenu from './components/TopMenu.js';
 import m, { mapToCanvasCoords } from "./components/moveUtil.js";
 import levels from "./components/levels.js";
 import { Grid, Exit } from "./components/Grid.js";
@@ -40,6 +41,7 @@ const App = () => {
         lvlMoves[i]['category'] = "preStage";
       }
     }
+    context.setCurrentAttempts(context.currentAttempts + 1);
     return context.setInstanceKey(context.instanceKey + 1);
   };
 
@@ -108,7 +110,14 @@ const App = () => {
   return (
     <div className="App" style={{ backgroundImage: `url(${level.theme.backgroundImage})` }}>
       <div className="Canvas">
-        <div
+      <div className="menu-container">
+        <TopMenu
+          title={level.theme.levelTitle}
+          menuBackground={level.theme.menuContainerBackground}
+          font={level.theme.font}
+        />
+      </div>
+      <div
           className="sans-serif"
           style={{
             position: "absolute",
@@ -160,6 +169,7 @@ const App = () => {
       </div>
       <div className="right-container">
         <CustomMoveCtrl
+          handleRestart={handleRestart}
           destination={destination}
           movement={[translate, reflect, rotate]}
           moves={moves}
