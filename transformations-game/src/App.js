@@ -7,10 +7,7 @@ import levels from "./components/levels.js";
 import { Grid, Exit } from "./components/Grid.js";
 import { Player } from "./components/Player.js";
 import { Stage } from '@inlet/react-pixi';
-import { createStore } from "redux"
-
 import "tachyons";
-
 
 
 const App = () => {
@@ -97,19 +94,19 @@ const App = () => {
 
   const PopUp = () => (
     <div className='popup'>
-      <div className='popup_inner'>
+      <div className='popup_inner' style={{ fontFamily: level.theme.font.type }}>
         <h1
           className={win === true ? "win-font" : "lose-font"}>
-          {win === true ? "You Wrangled Yerself A 'Right Triangle'!" : (lose === 1 ? "Yer Outta Moves Partner!" : "Yer Outta Bounds!")}
+          {win === true ? level.popUpMessages[0] : (lose === 1 ? level.popUpMessages[1] : level.popUpMessages[2])}
         </h1>
         <button className="restart-button" onClick={() => handleRestart()}>Play Again?</button>
-        {win === true ? <button className="next-level-button" onClick={() => handleNextLevel()}> Next Level! </button> : null}
+        {win === true && context.currentLevel + 1 < levels.length ? <button className="next-level-button" onClick={() => handleNextLevel()}> Next Level! </button> : null}
       </div>
     </div>
   );
 
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundImage: `url(${level.theme.backgroundImage})` }}>
       <div className="Canvas">
         <div
           className="sans-serif"
@@ -121,10 +118,21 @@ const App = () => {
           }}
         >
           <Stage width={SIZE + GRID_MARGIN * 2} height={SIZE + GRID_MARGIN * 2} options={{ transparent: true, antialias: true }}>
-            <Grid x={20} y={20} width={800} height={800} target={target} />
+            <Grid
+              x={20}
+              y={20}
+              width={800}
+              height={800}
+              axis={level.theme.grid.axis}
+              border={level.theme.grid.border}
+              textColor={level.theme.grid.text} />
             <Exit
-              target={target} />
+              target={target}
+              line={level.theme.exitLine}
+              fill={level.theme.exitFill} />
             < Player
+              line={level.theme.playerLine}
+              fill={level.theme.playerFill}
               start={triangle}
               current={current}
               setCurrent={setCurrent}
@@ -157,6 +165,10 @@ const App = () => {
           moves={moves}
           setMoves={setMoves}
           moving={moving}
+          topBackground={level.theme.topContainerBackground}
+          botBackground={level.theme.botContainerBackground}
+          moveColour={level.theme.moveColour}
+          font={level.theme.font}
         />
       </div>
       <div>

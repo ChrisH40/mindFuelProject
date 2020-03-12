@@ -58,17 +58,18 @@ const CustomMoveCtrl = props => {
         }
         draggable
         className={"draggable " + t.style + " tc f5 pa0"}
+        style={{backgroundColor: (t.style === "translate" ? props.moveColour.translate : t.style === "rotate-counter" || t.style === "rotate-clock" ? props.moveColour.rotate : t.style === "reflect-x" || t.style === "reflect-y" ? props.moveColour.reflect : "")}}
       >
-        <span className="move-text">{t.name}</span>
+        <span className="move-text" style={{color: props.moveColour.text}}>{t.name}</span>
       </div>
     );
   });
 
   return (
     <div>
-      <div className="top-container">
-        <h2 className="tc f3 pa0">Please Select A Move</h2>
-        <span className="move-header">Moves:</span>
+      <div className="top-container" style={{ backgroundColor: props.topBackground}}>
+        <h2 className="tc f3 pa0" style={{fontFamily: props.font.type }}>Please Select A Move</h2>
+        <span className="move-header" style={{fontFamily: props.font.type }}>Moves:</span>
         <div
           className="preStage"
           onDragOver={e => onDragOver(e)}
@@ -79,8 +80,8 @@ const CustomMoveCtrl = props => {
           {displayMoves.preStage}
         </div>
       </div>
-      <div className="bottom-container">
-        <span className="move-header">Drop Here:</span>
+      <div className="bottom-container" style={{ backgroundColor: props.botBackground}}>
+        <span className="move-header" style={{fontFamily: props.font.type }}>Drop Here:</span>
         <div
           className={"droppable " + (grabbed === true ? "drop-area" : null)}
           onDragOver={e => onDragOver(e)}

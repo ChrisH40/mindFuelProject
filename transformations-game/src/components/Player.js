@@ -166,10 +166,10 @@ export const Player = (props) => {
     const Triangle = PixiComponent('Polygon', {
         create: props => new PIXI.Graphics(),
         applyProps: (triangle, _, props) => {
-            const { start, x, y, angle, pivot, scaleX, scaleY, lose, win, fill } = props;
+            const { start, x, y, angle, pivot, scaleX, scaleY, fill, line } = props;
             triangle.clear();
-            triangle.beginFill(0xFFD700, 1);
-            triangle.lineStyle(5, 0xDAA520, 1);
+            triangle.beginFill(fill.color, fill.opacity);
+            triangle.lineStyle(line.weight, line.color, 1);
             triangle.drawPolygon([start.x1, start.y1, start.x2, start.y2, start.x3, start.y3]);
             triangle.endFill();
             triangle.pivot.x = pivot.x;
@@ -184,6 +184,8 @@ export const Player = (props) => {
 
     return (
         <Triangle
+            line={props.line}
+            fill={props.fill}
             start={props.start}
             x={x}
             y={y}

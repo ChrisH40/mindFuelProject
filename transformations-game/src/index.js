@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import AppRouter from "./components/AppRouter"
 import * as serviceWorker from './serviceWorker';
 import { ContextProvider, AppContext } from './components/app-context.js';
