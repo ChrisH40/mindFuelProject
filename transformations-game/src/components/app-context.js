@@ -5,7 +5,7 @@ export const AppContext = React.createContext();
 
 export const ContextProvider = () => {
     const [instanceKey, setInstanceKey] = useState(0);
-    const [currentLevel, setCurrentLevel] = useState(2);
+    const [currentLevel, setCurrentLevel] = useState(1);
     const [currentAttempts, setCurrentAttempts] = useState(0);
     const [currentScore, setCurrentScore] = useState(20000);
 

@@ -3,7 +3,7 @@ import { AppContext } from '../components/app-context.js';
 import "tachyons";
 
 const CustomMoveCtrl = props => {
-  const context = React.useContext(AppContext); 
+  const context = React.useContext(AppContext);
 
   const [translate, reflect, rotate] = props.movement;
   let [grabbed, setGrabbed] = useState(false);
@@ -77,9 +77,6 @@ const CustomMoveCtrl = props => {
           {displayMoves.preStage}
         </div>
       </div>
-      <div className="middle-container">
-        <button className="reset-button" onClick={() => props.handleRestart()}>Reset Level</button>
-      </div>
       <div className="bottom-container" style={{ backgroundColor: props.botBackground }}>
         <span className="move-header" style={{ fontFamily: props.font.type, color: props.font.color }}>Drop Here:</span>
         <div
@@ -89,6 +86,9 @@ const CustomMoveCtrl = props => {
         >
           {displayMoves.staged}
         </div>
+      </div>
+      <div className="middle-container">
+        <button className="reset-button" onClick={() => props.handleRestart()}>Reset Level</button>
       </div>
     </div>
   );
