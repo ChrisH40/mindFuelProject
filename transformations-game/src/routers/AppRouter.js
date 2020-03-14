@@ -3,7 +3,6 @@ import { Router, Switch, Route } from "react-router";
 import LoginPage from "../components/LoginPage";
 import Game from "../components/Game";
 import { createBrowserHistory } from "history";
-import { firebase } from "../firebase/firebase";
 
 export const history = createBrowserHistory();
 

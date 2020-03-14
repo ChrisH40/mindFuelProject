@@ -15,8 +15,11 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-database.ref().set({
-  name: "team neptune"
-});
+// database
+//   .ref("users/")
+//   .once("value")
+//   .then(snapshot => {
+//     console.log(snapshot.val()["another"]);
+//   });
 
-export { firebase };
+export { firebase, googleAuthProvider, database };
