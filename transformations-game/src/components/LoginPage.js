@@ -1,13 +1,21 @@
-import React from 'react'
-import {history} from "./AppRouter"
+import React from "react";
+import { history } from "../routers/AppRouter";
 
 const LoginPage = props => {
-    return <div>Login
-        <button onClick={() => {
-            history.push("/game")
-        }}>Play as a Guest</button>
-        <button>Log in with Google</button>
+  return (
+    <div>
+      <h1>Game Title Placeholder</h1>
+      <p>Game description placeholder</p>
+      <button
+        onClick={() => {
+          history.push("/game");
+        }}
+      >
+        Play as a Guest
+      </button>
+      <button>Log in with Google</button>
     </div>
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

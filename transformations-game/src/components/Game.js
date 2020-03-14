@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { AppContext } from './components/app-context.js';
-import { SIZE, GRID_MARGIN, initTriangleShape } from "./components/settings.js";
-import CustomMoveCtrl from "./components/CustomMoveCtrl.js";
-import TopMenu from './components/TopMenu.js';
-import m, { mapToCanvasCoords } from "./components/moveUtil.js";
-import levels from "./components/levels.js";
-import { Grid, Exit } from "./components/Grid.js";
-import { Player } from "./components/Player.js";
-import { Stage } from '@inlet/react-pixi';
+import { AppContext } from "../context/app-context.js";
+import { SIZE, GRID_MARGIN, initTriangleShape } from "../data/settings.js";
+import CustomMoveCtrl from "./CustomMoveCtrl.js";
+import TopMenu from "./TopMenu.js";
+import m, { mapToCanvasCoords } from "../utils/moveUtil.js";
+import levels from "../data/levels.js";
+import { Grid, Exit } from "./Grid.js";
+import { Player } from "./Player.js";
+import { Stage } from "@inlet/react-pixi";
 import "tachyons";
-
 
 const App = () => {
   const context = React.useContext(AppContext);
@@ -24,21 +23,21 @@ const App = () => {
   const [moveX, setMoveX] = useState(false);
   const [moveY, setMoveY] = useState(false);
   const [rotation, setRotation] = useState(0);
-  const [rotationFocal, setRotationFocal] = useState({ "x": 420, "y": 420 });
+  const [rotationFocal, setRotationFocal] = useState({ x: 420, y: 420 });
   const [reflectionX, setReflectionX] = useState(false);
   const [reflectionY, setReflectionY] = useState(false);
 
   let [moves, setMoves] = useState(level.moves);
 
-  let [win, setWin] = useState(false)
+  let [win, setWin] = useState(false);
   let [lose, setLose] = useState(0);
 
   // Might change with database. Can possibly store levels in there.
   const handleRestart = () => {
-    const lvlMoves = levels[context.currentLevel]['moves'];
+    const lvlMoves = levels[context.currentLevel]["moves"];
     for (let i = 0; i < lvlMoves.length; i++) {
-      if (lvlMoves[i]['category'] === "staged") {
-        lvlMoves[i]['category'] = "preStage";
+      if (lvlMoves[i]["category"] === "staged") {
+        lvlMoves[i]["category"] = "preStage";
       }
     }
     context.setCurrentAttempts(context.currentAttempts + 1);
@@ -54,7 +53,7 @@ const App = () => {
 
   const translate = (current, xUnit, yUnit) => {
     let transformedCoords = m.translate(current, xUnit, yUnit);
-    setDestination(destination = transformedCoords);
+    setDestination((destination = transformedCoords));
     setMoving(true);
     setMoveX(xUnit !== 0 ? true : false);
     setMoveY(yUnit !== 0 ? true : false);
@@ -62,15 +61,15 @@ const App = () => {
 
   const rotate = (current, xUnit, yUnit, deg) => {
     let transformedCoords = m.rotate(current, xUnit, yUnit, deg);
-    setDestination(destination = transformedCoords);
+    setDestination((destination = transformedCoords));
     setMoving(true);
     setRotation(-deg);
-    setRotationFocal(mapToCanvasCoords({ "x": xUnit, "y": yUnit }));
+    setRotationFocal(mapToCanvasCoords({ x: xUnit, y: yUnit }));
   };
 
   const reflect = (current, a, b, c) => {
     let transformedCoords = m.reflect(current, a, b, c);
-    setDestination(destination = transformedCoords);
+    setDestination((destination = transformedCoords));
     setMoving(true);
     setReflectionX(a === 1 ? true : false);
     setReflectionY(b === 1 ? true : false);
@@ -79,47 +78,74 @@ const App = () => {
   const winLoseCheck = (current, exit) => {
     if (JSON.stringify(current) === JSON.stringify(exit)) {
       setWin(true);
-    }
-    else {
-      if (lose === 0 && (
-        current.x1 > 820 || current.x2 > 820 || current.x3 > 820 ||
-        current.x1 < 0 || current.x2 < 0 || current.x3 < 0 ||
-        current.y1 > 820 || current.y2 > 820 || current.y3 > 820 ||
-        current.y1 < 0 || current.y2 < 0 || current.y3 < 0)) {
+    } else {
+      if (
+        lose === 0 &&
+        (current.x1 > 820 ||
+          current.x2 > 820 ||
+          current.x3 > 820 ||
+          current.x1 < 0 ||
+          current.x2 < 0 ||
+          current.x3 < 0 ||
+          current.y1 > 820 ||
+          current.y2 > 820 ||
+          current.y3 > 820 ||
+          current.y1 < 0 ||
+          current.y2 < 0 ||
+          current.y3 < 0)
+      ) {
         setLose(2);
       }
       let movesLeft = moves.find(move => move.category === "preStage");
       if (lose === 0 && movesLeft === undefined) {
         setLose(1);
-      }
-      else return;
+      } else return;
     }
   };
 
   const PopUp = () => (
-    <div className='popup'>
-      <div className='popup_inner' style={{ fontFamily: level.theme.font.type }}>
-        <h1
-          className={win === true ? "win-font" : "lose-font"}>
-          {win === true ? level.popUpMessages[0] : (lose === 1 ? level.popUpMessages[1] : level.popUpMessages[2])}
+    <div className="popup">
+      <div
+        className="popup_inner"
+        style={{ fontFamily: level.theme.font.type }}
+      >
+        <h1 className={win === true ? "win-font" : "lose-font"}>
+          {win === true
+            ? level.popUpMessages[0]
+            : lose === 1
+            ? level.popUpMessages[1]
+            : level.popUpMessages[2]}
         </h1>
-        <button className="restart-button" onClick={() => handleRestart()}>Play Again?</button>
-        {win === true && context.currentLevel + 1 < levels.length ? <button className="next-level-button" onClick={() => handleNextLevel()}> Next Level! </button> : null}
+        <button className="restart-button" onClick={() => handleRestart()}>
+          Play Again?
+        </button>
+        {win === true && context.currentLevel + 1 < levels.length ? (
+          <button
+            className="next-level-button"
+            onClick={() => handleNextLevel()}
+          >
+            {" "}
+            Next Level!{" "}
+          </button>
+        ) : null}
       </div>
     </div>
   );
 
   return (
-    <div className="App" style={{ backgroundImage: `url(${level.theme.backgroundImage})` }}>
+    <div
+      className="App"
+      style={{ backgroundImage: `url(${level.theme.backgroundImage})` }}
+    >
       <div className="Canvas">
-      <div className="menu-container">
-        <TopMenu
-          title={level.theme.levelTitle}
-          menuBackground={level.theme.menuContainerBackground}
-          font={level.theme.font}
-        />
-      </div>
-      <div
+        <div className="menu-container">
+          <TopMenu
+            title={level.theme.levelTitle}
+            menuBackground={level.theme.menuContainerBackground}
+            font={level.theme.font}
+          />
+        </div>
+        <div
           className="sans-serif"
           style={{
             position: "absolute",
@@ -128,7 +154,11 @@ const App = () => {
             transform: "translate(-50%, -50%)"
           }}
         >
-          <Stage width={SIZE + GRID_MARGIN * 2} height={SIZE + GRID_MARGIN * 2} options={{ transparent: true, antialias: true }}>
+          <Stage
+            width={SIZE + GRID_MARGIN * 2}
+            height={SIZE + GRID_MARGIN * 2}
+            options={{ transparent: true, antialias: true }}
+          >
             <Grid
               x={20}
               y={20}
@@ -136,12 +166,14 @@ const App = () => {
               height={800}
               axis={level.theme.grid.axis}
               border={level.theme.grid.border}
-              textColor={level.theme.grid.text} />
+              textColor={level.theme.grid.text}
+            />
             <Exit
               target={target}
               line={level.theme.exitLine}
-              fill={level.theme.exitFill} />
-            < Player
+              fill={level.theme.exitFill}
+            />
+            <Player
               line={level.theme.playerLine}
               fill={level.theme.playerFill}
               start={triangle}
@@ -183,12 +215,9 @@ const App = () => {
           font={level.theme.font}
         />
       </div>
-      <div>
-        {win === true || lose === 1 || lose === 2 ? <PopUp /> : null}
-      </div>
+      <div>{win === true || lose === 1 || lose === 2 ? <PopUp /> : null}</div>
     </div>
-  )
+  );
 };
 
 export default App;
-

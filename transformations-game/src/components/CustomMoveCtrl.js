@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppContext } from '../components/app-context.js';
+import { AppContext } from "../context/app-context.js";
 import "tachyons";
 
 const CustomMoveCtrl = props => {
@@ -12,7 +12,7 @@ const CustomMoveCtrl = props => {
     ev.preventDefault();
     ev.target.style.cursor = "grabbing";
     if (grabbed === false) {
-      setGrabbed(true)
+      setGrabbed(true);
     } else return;
   };
 
@@ -51,22 +51,48 @@ const CustomMoveCtrl = props => {
       <div
         key={t.id}
         onDragStart={
-          t.category === "staged" || props.moving === true ? null : e => onDragStart(e, t.id)
+          t.category === "staged" || props.moving === true
+            ? null
+            : e => onDragStart(e, t.id)
         }
         draggable
         className={"draggable " + t.style + " tc f5 pa0"}
-        style={{ backgroundColor: (t.style === "translate" ? props.moveColour.translate : t.style === "rotate-counter" || t.style === "rotate-clock" ? props.moveColour.rotate : t.style === "reflect-x" || t.style === "reflect-y" ? props.moveColour.reflect : "") }}
+        style={{
+          backgroundColor:
+            t.style === "translate"
+              ? props.moveColour.translate
+              : t.style === "rotate-counter" || t.style === "rotate-clock"
+              ? props.moveColour.rotate
+              : t.style === "reflect-x" || t.style === "reflect-y"
+              ? props.moveColour.reflect
+              : ""
+        }}
       >
-        <span className="move-text" style={{ color: props.moveColour.text }}>{t.name}</span>
+        <span className="move-text" style={{ color: props.moveColour.text }}>
+          {t.name}
+        </span>
       </div>
     );
   });
 
   return (
     <div>
-      <div className="top-container" style={{ backgroundColor: props.topBackground }}>
-        <h2 className="tc f3 pa0" style={{ fontFamily: props.font.type, color: props.font.color }}>Please Select A Move</h2>
-        <span className="move-header" style={{ fontFamily: props.font.type, color: props.font.color }}>Moves:</span>
+      <div
+        className="top-container"
+        style={{ backgroundColor: props.topBackground }}
+      >
+        <h2
+          className="tc f3 pa0"
+          style={{ fontFamily: props.font.type, color: props.font.color }}
+        >
+          Please Select A Move
+        </h2>
+        <span
+          className="move-header"
+          style={{ fontFamily: props.font.type, color: props.font.color }}
+        >
+          Moves:
+        </span>
         <div
           className="preStage"
           onDragOver={e => onDragOver(e)}
@@ -77,8 +103,16 @@ const CustomMoveCtrl = props => {
           {displayMoves.preStage}
         </div>
       </div>
-      <div className="bottom-container" style={{ backgroundColor: props.botBackground }}>
-        <span className="move-header" style={{ fontFamily: props.font.type, color: props.font.color }}>Drop Here:</span>
+      <div
+        className="bottom-container"
+        style={{ backgroundColor: props.botBackground }}
+      >
+        <span
+          className="move-header"
+          style={{ fontFamily: props.font.type, color: props.font.color }}
+        >
+          Drop Here:
+        </span>
         <div
           className={"droppable " + (grabbed === true ? "drop-area" : null)}
           onDragOver={e => onDragOver(e)}
@@ -88,7 +122,9 @@ const CustomMoveCtrl = props => {
         </div>
       </div>
       <div className="middle-container">
-        <button className="reset-button" onClick={() => props.handleRestart()}>Reset Level</button>
+        <button className="reset-button" onClick={() => props.handleRestart()}>
+          Reset Level
+        </button>
       </div>
     </div>
   );
@@ -97,14 +133,14 @@ const CustomMoveCtrl = props => {
 export default CustomMoveCtrl;
 
 // Line 22
-// let selectedMove = 
+// let selectedMove =
 
 // Line 38
 // let updatedMoves = [...props.moves]; //copy old array data
 
-    // for (let item of updatedMoves) {
-    //   if (item.name === selectedMove.name) {
-    //     item = selectedMove;
-    //   }
-    // }
-    // props.setMoves(updatedMoves);
+// for (let item of updatedMoves) {
+//   if (item.name === selectedMove.name) {
+//     item = selectedMove;
+//   }
+// }
+// props.setMoves(updatedMoves);

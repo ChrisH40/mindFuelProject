@@ -1,4 +1,4 @@
-import { SIZE, UNIT, GRID_MARGIN } from "./settings";
+import { SIZE, UNIT, GRID_MARGIN } from "../data/settings";
 
 // Object.size = obj => {
 //   let size = 0,
@@ -93,8 +93,12 @@ export default {
     let cosDeg = Math.cos((deg / 180) * PI);
     coords = reorgCoords(mapToGameCoords(coords));
     for (let [idx, pt] of Object.entries(coords)) {
-      rotated[`x${idx}`] = Math.round((pt.x - xr) * cosDeg - (pt.y - yr) * sinDeg + xr);
-      rotated[`y${idx}`] = Math.round((pt.x - xr) * sinDeg + (pt.y - yr) * cosDeg + yr);
+      rotated[`x${idx}`] = Math.round(
+        (pt.x - xr) * cosDeg - (pt.y - yr) * sinDeg + xr
+      );
+      rotated[`y${idx}`] = Math.round(
+        (pt.x - xr) * sinDeg + (pt.y - yr) * cosDeg + yr
+      );
     }
     return mapToCanvasCoords(rotated);
   },
@@ -116,12 +120,14 @@ export default {
     const reflected = {};
     coords = reorgCoords(mapToGameCoords(coords));
     for (let [idx, pt] of Object.entries(coords)) {
-      reflected[`x${idx}`] =
-        Math.round(((b * b - a * a) * pt.x - 2 * a * b * pt.y - 2 * a * c) /
-          (a * a + b * b));
-      reflected[`y${idx}`] =
-        Math.round(((a * a - b * b) * pt.y - 2 * a * b * pt.x - 2 * b * c) /
-          (a * a + b * b));
+      reflected[`x${idx}`] = Math.round(
+        ((b * b - a * a) * pt.x - 2 * a * b * pt.y - 2 * a * c) /
+          (a * a + b * b)
+      );
+      reflected[`y${idx}`] = Math.round(
+        ((a * a - b * b) * pt.y - 2 * a * b * pt.x - 2 * b * c) /
+          (a * a + b * b)
+      );
     }
     return mapToCanvasCoords(reflected);
   }
