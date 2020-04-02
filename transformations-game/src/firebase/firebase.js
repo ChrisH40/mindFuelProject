@@ -1,4 +1,7 @@
 import * as firebase from "firebase";
+import React from "react";
+
+const FirebaseContext = React.createContext(null);
 
 var firebaseConfig = {
   apiKey: "AIzaSyD0-XnOaPSNIEoMR71BvpmAsI0Q0tq6xIE",
@@ -9,17 +12,28 @@ var firebaseConfig = {
   messagingSenderId: "284410010112",
   appId: "1:284410010112:web:07bae1c8c6110e809ad6e5"
 };
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
-const database = firebase.database();
-const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+class Firebase {
+  constructor() {
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    this.auth = firebase.auth();
+    this.db = firebase.database();
+    this.googleProvider = new firebase.auth.GoogleAuthProvider();
+  }
 
-// database
-//   .ref("users/")
-//   .once("value")
-//   .then(snapshot => {
-//     console.log(snapshot.val()["another"]);
-//   });
+  /** Auth API */
+  doSignInWithGoogle = () => this.auth.signInWithPopup(this.googleProvider);
 
-export { firebase, googleAuthProvider, database };
+  doSignOut = () => this.auth.signOut();
+
+  doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+
+  doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
+
+  /** User API */
+  user = uid => this.db.ref(`users/${uid}`);
+  users = () => this.db.ref(`users`);
+}
+
+export default Firebase;

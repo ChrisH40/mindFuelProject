@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { history } from "../routers/AppRouter";
-import { startLogin } from "../utils/auth";
+import { withFirebase } from "../firebase";
 
 const LoginPage = props => {
   return (
@@ -14,9 +14,40 @@ const LoginPage = props => {
       >
         Play as a Guest
       </button>
-      <button onClick={startLogin}>Log in with Google</button>
+      <SignInGoogle />
     </div>
   );
 };
+
+const SignInGoogleBase = ({ firebase }) => {
+  const [error, setError] = useState(null);
+  const onSubmit = e => {
+    e.preventDefault();
+    firebase
+      .doSignInWithGoogle()
+      .then(authUser => {
+        // create user in firebase db
+        return firebase.user(authUser.user.uid).set({
+          username: authUser.user.displayName,
+          email: authUser.user.email,
+          roles: {}
+        });
+      })
+      .then(() => {
+        setError(null);
+        history.push("/game");
+      })
+      .catch(error => setError(error));
+  };
+
+  return (
+    <form onSubmit={onSubmit}>
+      <button>Sign In with Google</button>
+      {error && <p>{error.message}</p>}
+    </form>
+  );
+};
+
+export const SignInGoogle = withFirebase(SignInGoogleBase);
 
 export default LoginPage;

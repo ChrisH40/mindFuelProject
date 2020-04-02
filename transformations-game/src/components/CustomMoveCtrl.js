@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { AppContext } from "../context/app-context.js";
+import { GameContext } from "../game context/context.js";
 import "tachyons";
 
 const CustomMoveCtrl = props => {
-  const context = React.useContext(AppContext);
+  const context = React.useContext(GameContext);
 
   const [translate, reflect, rotate] = props.movement;
   let [grabbed, setGrabbed] = useState(false);

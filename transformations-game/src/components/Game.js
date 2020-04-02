@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppContext } from "../context/app-context.js";
+import { withGameContext } from "../game context/context.js";
 import { SIZE, GRID_MARGIN, initTriangleShape } from "../data/settings.js";
 import CustomMoveCtrl from "./CustomMoveCtrl.js";
 import TopMenu from "./TopMenu.js";
@@ -10,8 +10,8 @@ import { Player } from "./Player.js";
 import { Stage } from "@inlet/react-pixi";
 import "tachyons";
 
-const App = () => {
-  const context = React.useContext(AppContext);
+const Game = props => {
+  const context = props.gameState;
 
   const level = levels[context.currentLevel];
 
@@ -220,4 +220,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withGameContext(Game);

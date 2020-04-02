@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "tachyons";
-import { AppContext } from "../context/app-context.js";
+import { GameContext } from "../game context/context.js";
 
 const TopMenu = props => {
-  const context = React.useContext(AppContext);
+  const context = React.useContext(GameContext);
 
   return (
     <div
