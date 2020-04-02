@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
+import { withAuthentication } from "../session";
 
 export const GameContext = React.createContext();
 
-export const GameContextProvider = props => {
+const GameContextProviderBase = props => {
   const [instanceKey, setInstanceKey] = useState(0);
   const [currentLevel, setCurrentLevel] = useState(1);
   const [currentAttempts, setCurrentAttempts] = useState(0);
@@ -29,6 +30,8 @@ export const GameContextProvider = props => {
     </GameContext.Provider>
   );
 };
+
+export const GameContextProvider = withAuthentication(GameContextProviderBase);
 
 export const withGameContext = Component => props => (
   <GameContext.Consumer>
