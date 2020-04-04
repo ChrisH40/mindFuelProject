@@ -1,13 +1,29 @@
 import React, { useState, useEffect, useContext } from "react";
-import { withAuthentication } from "../session";
+import {
+  withAuthenticationProvider,
+  withAuthenticationConsumer
+} from "../session";
 
 export const GameContext = React.createContext();
 
 const GameContextProviderBase = props => {
+  const initState = {
+    currentLevel: 1,
+    currentAttempts: 0,
+    currentScore: 20000
+  };
+
+  // if user has saved game session from db, render that session
+  if (props.authUser.gameState) {
+    initState = props.authUser.gameState;
+  }
+
   const [instanceKey, setInstanceKey] = useState(0);
-  const [currentLevel, setCurrentLevel] = useState(1);
-  const [currentAttempts, setCurrentAttempts] = useState(0);
-  const [currentScore, setCurrentScore] = useState(20000);
+  const [currentLevel, setCurrentLevel] = useState(initState.currentLevel);
+  const [currentAttempts, setCurrentAttempts] = useState(
+    initState.currentAttempts
+  );
+  const [currentScore, setCurrentScore] = useState(initState.currentScore);
 
   const state = {
     currentLevel,
@@ -31,7 +47,9 @@ const GameContextProviderBase = props => {
   );
 };
 
-export const GameContextProvider = withAuthentication(GameContextProviderBase);
+export const GameContextProvider = withAuthenticationProvider(
+  withAuthenticationConsumer(GameContextProviderBase)
+);
 
 export const withGameContext = Component => props => (
   <GameContext.Consumer>

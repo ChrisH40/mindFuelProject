@@ -1,3 +1,8 @@
 import AuthUserContext from "./context";
-import withAuthentication from "./withAuthentication";
-export { AuthUserContext, withAuthentication };
+import withAuthenticationProvider from "./withAuthenticationProvider";
+import withAuthenticationConsumer from "./withAuthenticationConsumer";
+export {
+  AuthUserContext,
+  withAuthenticationProvider,
+  withAuthenticationConsumer
+};
