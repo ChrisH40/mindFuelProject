@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+
 import * as PIXI from "pixi.js";
-import { PixiComponent, useTick } from '@inlet/react-pixi';
+import { PixiComponent } from '@inlet/react-pixi';
 
 export const Grid = (props) => {
 
@@ -69,15 +70,9 @@ export const Grid = (props) => {
 };
 
 export const Exit = (props) => {
-    const [pivot, setPivot] = useState({ x: props.target.x1, y: props.target.y1 });
-    const [x, setX] = useState(props.target.x1);
-    const [y, setY] = useState(props.target.y1);
-
-    let i = 0;
-
-    useTick(delta => {
-        i += delta;
-    });
+    const [pivot] = useState({ x: props.target.x1, y: props.target.y1 });
+    const [x] = useState(props.target.x1);
+    const [y] = useState(props.target.y1);
 
     const PlayerExit = PixiComponent('Polygon', {
         create: props => new PIXI.Graphics(),

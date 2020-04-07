@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import * as PIXI from "pixi.js";
 import { PixiComponent, useTick } from '@inlet/react-pixi';
 
@@ -7,10 +8,11 @@ export const Player = (props) => {
     const [x, setX] = useState(props.start.x1);
     const [y, setY] = useState(props.start.y1);
     const [angle, setAngle] = useState(0);
-    let [storedAngle, setStoredAngle] = useState(0);
+    const [storedAngle, setStoredAngle] = useState(0);
     const [storedScaleX, setStoredScaleX] = useState(1);
     const [storedScaleY, setStoredScaleY] = useState(1);
 
+    // Resets angle degrees to > -360 and < 360
     const angleCalc = (ang) => {
         if (ang >= 360) {
             return (ang - 360);
@@ -21,6 +23,8 @@ export const Player = (props) => {
         else return ang;
     };
 
+    // Determines what pivot coordinates to use based on the current angle and reflection of the triangle.
+        // Ex: 270, -90, -1, 1 = 270° or -90°, x-axis reflection, no y-axis reflection
     const pivotCalc = (ang, xReflect, yReflect) => {
         const moveCombos = [
             [0, 0, 1, 1, { x: (props.rotationFocal["x"] + props.start.x1) - props.current.x1, y: (props.rotationFocal["y"] + props.start.y1) - props.current.y1 }],
@@ -41,7 +45,9 @@ export const Player = (props) => {
             [270, -90, -1, -1, { x: (props.rotationFocal["x"] + props.start.x1)- props.current.y1, y: (-props.rotationFocal["y"] + props.start.y1) + props.current.x1 }],
         ];
         for (let x = 0; x < moveCombos.length; x++) {
-            if ((ang === moveCombos[x][0] || ang === moveCombos[x][1]) && xReflect === moveCombos[x][2] && yReflect === moveCombos[x][3]) {
+            if ((ang === moveCombos[x][0] || ang === moveCombos[x][1]) && 
+                xReflect === moveCombos[x][2] && 
+                yReflect === moveCombos[x][3]) {
                 return moveCombos[x][4];
             }
         } return;
@@ -52,7 +58,7 @@ export const Player = (props) => {
         let i = 0;
         i += delta;
 
-        // *** ANIMATIONS ***  
+    // *** PLAYER ANIMATIONS ***  
         // Translate X-Axis (moves first)
         if (props.moveX === true) {
             // Move Right
@@ -71,7 +77,7 @@ export const Player = (props) => {
                     props.setCurrent(props.destination);
                 }
             }
-        }
+        };
 
         // Translate Y-Axis (moves second)
         if (props.moveY === true && props.moveX === false) {
@@ -92,8 +98,8 @@ export const Player = (props) => {
         };
 
         // Rotate (0, 0) origin
-        // Clockwise
         if (props.rotation !== 0) {
+            // Clockwise
             if (angle < storedAngle + props.rotation) {
                 setPivot(pivotCalc(storedAngle, storedScaleX, storedScaleY));
                 setX(props.rotationFocal["x"]);
@@ -193,8 +199,6 @@ export const Player = (props) => {
             pivot={pivot}
             scaleX={storedScaleX}
             scaleY={storedScaleY}
-            lose={props.lose}
-            win={props.win}
         />
     );
 };

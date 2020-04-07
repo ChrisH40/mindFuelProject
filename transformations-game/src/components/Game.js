@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { withGameContext } from "../game context/context.js";
+
 import { SIZE, GRID_MARGIN, initTriangleShape } from "../data/settings.js";
+import levels from "../data/levels.js";
+
+import m, { mapToCanvasCoords } from "../utils/moveUtil.js";
 import CustomMoveCtrl from "./CustomMoveCtrl.js";
 import TopMenu from "./TopMenu.js";
-import m, { mapToCanvasCoords } from "../utils/moveUtil.js";
-import levels from "../data/levels.js";
 import { Grid, Exit } from "./Grid.js";
 import { Player } from "./Player.js";
+import { PopUp } from "./PopUp.js";
+
 import { Stage } from "@inlet/react-pixi";
 import "tachyons";
 
@@ -14,11 +18,13 @@ const Game = props => {
   const context = props.gameState;
 
   const level = levels[context.currentLevel];
+  const [moves, setMoves] = useState(level.moves);
 
-  let triangle = initTriangleShape(level.start[0], level.start[1]);
-  let target = mapToCanvasCoords(level.target);
-  let [current, setCurrent] = useState(triangle);
-  let [destination, setDestination] = useState(triangle);
+  const triangle = initTriangleShape(level.start[0], level.start[1]);
+  const target = mapToCanvasCoords(level.target);
+  const [current, setCurrent] = useState(triangle);
+  const [destination, setDestination] = useState(triangle);
+
   const [moving, setMoving] = useState(false);
   const [moveX, setMoveX] = useState(false);
   const [moveY, setMoveY] = useState(false);
@@ -27,10 +33,8 @@ const Game = props => {
   const [reflectionX, setReflectionX] = useState(false);
   const [reflectionY, setReflectionY] = useState(false);
 
-  let [moves, setMoves] = useState(level.moves);
-
-  let [win, setWin] = useState(false);
-  let [lose, setLose] = useState(0);
+  const [win, setWin] = useState(false);
+  const [lose, setLose] = useState(0);
 
   // Might change with database. Can possibly store levels in there.
   const handleRestart = () => {
@@ -42,18 +46,12 @@ const Game = props => {
     }
     context.setCurrentAttempts(context.currentAttempts + 1);
     context.setCurrentScore(20000);
-    return context.setInstanceKey(context.instanceKey + 1);
-  };
-
-  const handleNextLevel = () => {
-    context.setCurrentScore(20000);
-    context.setCurrentLevel(context.currentLevel + 1);
     context.setInstanceKey(context.instanceKey + 1);
   };
 
   const translate = (current, xUnit, yUnit) => {
     let transformedCoords = m.translate(current, xUnit, yUnit);
-    setDestination((destination = transformedCoords));
+    setDestination(transformedCoords);
     setMoving(true);
     setMoveX(xUnit !== 0 ? true : false);
     setMoveY(yUnit !== 0 ? true : false);
@@ -61,7 +59,7 @@ const Game = props => {
 
   const rotate = (current, xUnit, yUnit, deg) => {
     let transformedCoords = m.rotate(current, xUnit, yUnit, deg);
-    setDestination((destination = transformedCoords));
+    setDestination(transformedCoords);
     setMoving(true);
     setRotation(-deg);
     setRotationFocal(mapToCanvasCoords({ x: xUnit, y: yUnit }));
@@ -69,7 +67,7 @@ const Game = props => {
 
   const reflect = (current, a, b, c) => {
     let transformedCoords = m.reflect(current, a, b, c);
-    setDestination((destination = transformedCoords));
+    setDestination(transformedCoords);
     setMoving(true);
     setReflectionX(a === 1 ? true : false);
     setReflectionY(b === 1 ? true : false);
@@ -102,35 +100,6 @@ const Game = props => {
       } else return;
     }
   };
-
-  const PopUp = () => (
-    <div className="popup">
-      <div
-        className="popup_inner"
-        style={{ fontFamily: level.theme.font.type }}
-      >
-        <h1 className={win === true ? "win-font" : "lose-font"}>
-          {win === true
-            ? level.popUpMessages[0]
-            : lose === 1
-            ? level.popUpMessages[1]
-            : level.popUpMessages[2]}
-        </h1>
-        <button className="restart-button" onClick={() => handleRestart()}>
-          Play Again?
-        </button>
-        {win === true && context.currentLevel + 1 < levels.length ? (
-          <button
-            className="next-level-button"
-            onClick={() => handleNextLevel()}
-          >
-            {" "}
-            Next Level!{" "}
-          </button>
-        ) : null}
-      </div>
-    </div>
-  );
 
   return (
     <div
@@ -194,8 +163,6 @@ const Game = props => {
               reflectionY={reflectionY}
               setReflectionY={setReflectionY}
               target={target}
-              win={win}
-              lose={lose}
               winLoseCheck={winLoseCheck}
             />
           </Stage>
@@ -215,7 +182,18 @@ const Game = props => {
           font={level.theme.font}
         />
       </div>
-      <div>{win === true || lose === 1 || lose === 2 ? <PopUp /> : null}</div>
+      <div>
+        {win === true || 
+          lose === 1 || 
+          lose === 2 ? 
+          <PopUp
+            handleRestart={handleRestart}
+            level={level}
+            levels={levels}
+            win={win}
+            lose={lose} /> : 
+          null}
+      </div>
     </div>
   );
 };
